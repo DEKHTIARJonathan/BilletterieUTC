@@ -1,0 +1,5 @@
+<config>
+	
+	<APIserver serverName="badgingServer" local="false"  ip="127.0.0.1" port="8888"/>
+	
+</config>
