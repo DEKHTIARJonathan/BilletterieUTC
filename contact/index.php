@@ -1,100 +1,93 @@
+<?php
+	// Page d'accueil : /index.php
+	header("Content-Type: text/html; charset=UTF-8");
+	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+  require_once $root.'/config.inc.php';
+	require_once $root.'/inc/checksession.php';
+	require_once $root.'/inc/dbconnect.php';
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-    
+<html>
     <head>
-        <meta charset="utf-8">
-        <title>Page de Contact de l'équipe Billetterie Evenementielle UTC</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="Jonathan Dekhtiar">
+			<title><?php echo $_CONFIG["website"]["title"]; ?></title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-              }
-        </style>
-        
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        
-        <script src="../scripts/jquery-1.9.1.min.js"  ></script>
-        <script src="../scripts/mailer.js"  ></script>
-                
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+			<!-- Loading Bootstrap -->
+			<link href="../flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <script type="text/javascript">
-            var RecaptchaOptions = {
-                lang : 'fr',
-                theme : 'white',
-            };
-        </script>
+			<!-- Loading Flat UI -->
+			<link href="../flatUI/css/flat-ui.min.css" rel="stylesheet">
+
+			<link rel="shortcut icon" href="../img/favicon.ico">
+
+			<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+			<!--[if lt IE 9]>
+				<script src="js/vendor/html5shiv.js"></script>
+				<script src="js/vendor/respond.min.js"></script>
+			<![endif]-->
+
+			<link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+			<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
-</head>
-    
+			<style type="text/css">
+				body {
+					padding-top: 60px;
+					padding-bottom: 40px;
+				}
+			</style>
+
+			<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+			<script src="../flatUI/js/vendor/jquery.min.js"></script>
+    </head>
     <body>
-        
+
+      <div class="container">
         <?php
-            include("../parts/header.php");
+            include("../parts/header2.php");
         ?>
-        
-        <div class="container">
 
-            <div class="hero-unit" style="height:170px; padding-top:25px; overflow:hidden;">
-                 <h1>Contacte la Team</h1>
-                    Vous souhaitez prendre part au projet de la Billetterie Évènementielle ?<br>
-                    Vous rencontrez un problème avec l'utilisation de la solution logicielle ?<br><br>
-                    <b>N'hésitez pas à nous contacter</b>
-             </div>
-             <br>
-             
-            <form method="post" name="MailerForm" id="MailerForm" action="#">
-            
-                <div class="row-fluid offset2 controls">
-                    <input id="name" name="name" type="text" class="span4" placeholder="Nom"> &#160;&#160;&#160;&#160;&#160;
-                    <input id="email" name="email" type="email" class="span4" placeholder="Adresse Email"><br>
-                    <div class="row-fluid">
-                            <textarea id="message" name="message" class="span8" placeholder="Votre Message" rows="8"></textarea>
-                    </div><br>
-                    
-                    
-                    
-                    
-                     <div class="row-fluid" style="margin-bottom:-50px;">
-                        <div class="span4">
-                        
-                        <?php
-                            require_once('recaptchalib.php');
-                            require_once('mail_conf.inc.php');
+        <div class="jumbotron" style="padding-top:25px; overflow:hidden;">
+            <h1>Contacte la Team</h1>
+            Vous souhaitez prendre part au projet de la Billetterie Évènementielle ?<br>
+            Vous rencontrez un problème avec l'utilisation de la solution logicielle ?<br><br>
+            <b>N'hésitez pas à nous contacter</b>
+        </div><br>
 
-                            echo recaptcha_get_html($publickey);
-                        ?>
-                        </div>
-                        <div class="span7" style=" margin-top:95px;">
-                            <input type="submit" id="contact-submit" class="btn btn-primary span3" value="Envoyer" />
-                        </div>
+			<form method="post" name="MailerForm" id="MailerForm" action="#">
+				<div class="row controls">
+					<div class="form-group  col-md-6">
+            <input type="text" value="" placeholder="Nom" class="form-control" name="name" id="name">
+          </div>
+					<div class="form-group  col-md-6">
+            <input type="email" value="" placeholder="Adresse Email" class="form-control" name="email" id="email">
+          </div>
+					<div class="form-group  col-md-12">
+            <textarea placeholder="Votre Message" class="form-control" name="message" id="message" rows="8"></textarea>
+          </div>
+					<div class="col-md-5" style="margin-top:15px; text-align:right;">
+						<?php
+							require_once('recaptchalib.php');
+							require_once('mail_conf.inc.php');
+							echo recaptcha_get_html($publickey);
+						?>
+					</div>
+					<div class="col-md-5 col-sm-push-1" style=" margin-top:65px;">
+						<input type="submit" id="contact-submit" class="btn btn-primary col-md-8" value="Envoyer" />
+					</div>
+				</div>
+			</form>
 
-                    </div>
-                    
-                </div>
-                  
-              </form>
-                  
-            </div> 
-            
-                     
-            <?php
-                include("../parts/footer.php");
-            ?>
-    
-        
-        
-         
+				<?php
+					include("../parts/footer.php");
+				?>
+			</div>
+
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../flatUI/js/vendor/video.js"></script>
+		<script src="../flatUI/js/flat-ui.min.js"></script>
     </body>
-
 </html>

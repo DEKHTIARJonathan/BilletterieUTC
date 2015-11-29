@@ -10,34 +10,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+			<title><?php echo $_CONFIG["website"]["title"]; ?></title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+			<!-- Loading Bootstrap -->
+			<link href="../flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <title> Billetterie UTC </title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<!-- Loading Flat UI -->
+			<link href="../flatUI/css/flat-ui.min.css" rel="stylesheet">
 
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+			<link rel="shortcut icon" href="../img/favicon.ico">
 
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-              }
-        </style>
+			<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+			<!--[if lt IE 9]>
+				<script src="js/vendor/html5shiv.js"></script>
+				<script src="js/vendor/respond.min.js"></script>
+			<![endif]-->
 
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="../css/style.css" />
 
-        <script src="../scripts/jquery-1.9.1.min.js"  ></script>
-        <!-- <script type="text/javascript" src="scripts/general.js" charset="utf-8"></script> -->
+			<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
+			<style type="text/css">
+				body {
+					padding-top: 60px;
+					padding-bottom: 40px;
+				}
+			</style>
+
+			<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+			<script src="../flatUI/js/vendor/jquery.min.js"></script>
     </head>
     <body>
 
       <div class="container">
         <?php
-            include("../parts/header.php");
+            include("../parts/header2.php");
         ?>
 
         <div class="container">
@@ -99,20 +109,11 @@
 					include("../parts/footer.php");
 				?>
 
-				<div class="modal hide fade" id="modal" style="display: none;">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 id="modal-header"></h3>
-					</div>
-					<div class="modal-body" id="modal-body">
-					</div>
-				</div>
-
-
 			</div>
 		</div>
 
-        <script src="../bootstrap/js/bootstrap-modal.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../flatUI/js/vendor/video.js"></script>
+		<script src="../flatUI/js/flat-ui.min.js"></script>
     </body>
 </html>

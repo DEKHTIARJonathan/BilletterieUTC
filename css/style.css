@@ -1,31 +1,38 @@
-html,
+footer {
+    background-color: initial;
+    color: #6F6C6C;
+}
+
 body {
-    height: 100%;
-    /* The html and body elements cannot have any padding or margin. */
+    font-size: 14px;
 }
 
-/* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
+h2, .h2 {
+    font-size: 40px;
 }
 
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-he  ht: 60px;
-}
-#footer {
-    background-color: #f5f5f5;
+h3, .h3 {
+    font-size: 32px;
 }
 
-.container {
-    width: auto;
-    max-width: 1170px;
+h4, .h4 {
+    font-size: 20px;
+    font-weight: normal;
 }
-.container .credit {
-    margin: 20px 0;
+
+
+p {
+    font-size: 14px;
+}
+
+.modal-lg {
+    width: 1200px;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.btn-lg, .btn-group-lg>.btn {
+    font-size: 15px;
 }
