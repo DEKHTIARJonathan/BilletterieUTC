@@ -13,5 +13,8 @@
 	$_CONFIG['service'] = $_CONFIG['home']."inc/connect.php";
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	$_CONFIG['uploadPath'] = $root.'/images/upload/';
+	
+	$_CONFIG['ginger']["key"] = "###################################";
+	$_CONFIG['ginger']["url"] = "https://assos.utc.fr/ginger_dev/v1/";
 
 ?>
