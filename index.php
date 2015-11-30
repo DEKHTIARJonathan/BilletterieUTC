@@ -8,49 +8,43 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>Documentation - Bootflat</title>
+
+		<title><?php echo $_CONFIG["website"]["title"]; ?></title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Loading Bootstrap -->
+		<link href="flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Loading Flat UI -->
+		<link href="flatUI/css/flat-ui.min.css" rel="stylesheet">
+
+		<link rel="shortcut icon" href="img/favicon.ico">
+
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+		<!--[if lt IE 9]>
+			<script src="js/vendor/html5shiv.js"></script>
+			<script src="js/vendor/respond.min.js"></script>
+		<![endif]-->
+
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+		<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
+		<style type="text/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+			}
+		</style>
 
-		<head>
+		<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+		<script src="flatUI/js/vendor/jquery.min.js"></script>
 
-			<title><?php echo $_CONFIG["website"]["title"]; ?></title>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-			<!-- Loading Bootstrap -->
-			<link href="flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-			<!-- Loading Flat UI -->
-			<link href="flatUI/css/flat-ui.min.css" rel="stylesheet">
-
-			<link rel="shortcut icon" href="img/favicon.ico">
-
-			<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-			<!--[if lt IE 9]>
-				<script src="js/vendor/html5shiv.js"></script>
-				<script src="js/vendor/respond.min.js"></script>
-			<![endif]-->
-
-			<link rel="stylesheet" type="text/css" href="css/style.css" />
-
-			<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-
-			<style type="text/css">
-				body {
-					padding-top: 60px;
-					padding-bottom: 40px;
-				}
-			</style>
-
-			<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-			<script src="flatUI/js/vendor/jquery.min.js"></script>
-
-		</head>
-		<body>
-
+	</head>
+	<body>
 		<div class="container">
 			<?php
 				include("parts/header2.php");
@@ -82,9 +76,9 @@
 				</div>
 			</div>
 
-				<?php
-					include("parts/footer.php");
-				?>
+			<?php
+				include("parts/footer.php");
+			?>
 
 		</div>
 
@@ -92,5 +86,5 @@
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="flatUI/js/vendor/video.js"></script>
 		<script src="flatUI/js/flat-ui.min.js"></script>
-		</body>
+	</body>
 </html>
