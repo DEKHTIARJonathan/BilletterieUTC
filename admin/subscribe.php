@@ -1,88 +1,123 @@
-<?php 
-	// Page d'accueil : /index.php 
-	header("Content-Type: text/html; charset=UTF-8"); 
-	$error = isset($_GET['error']) ? $_GET['error'] : '';
-	
-	if ($error == "1")
-		echo "<script>alert('Un champ n\'a pas été renseigné !');</script>";
-	else if ($error == "2")
-		echo "<script>alert('Les mots de passe ne correspondent pas !');</script>";
+<?php
+	// Page d'accueil : /index.php
+	header("Content-Type: text/html; charset=UTF-8");
+	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+	require_once $root.'/config.inc.php';
+
+	$checkemail = isset($_GET['checkemail']) ? $_GET['checkemail'] : '';
+
+	if ($checkemail == "1")
+		echo "<script>alert('Check your email to confirm!');</script>";
+
 ?>
 
 <!DOCTYPE html>
-<html >
+<html>
   <head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title>Billetterie UTC - Subscription Panel</title>
-		
+
+		<title><?php echo $_CONFIG["website"]["title"]; ?></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Loading Bootstrap -->
+		<link href="../flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Loading Flat UI -->
+		<link href="../flatUI/css/flat-ui.min.css" rel="stylesheet">
+
+		<link rel="shortcut icon" href="../img/favicon.ico">
+
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+		<!--[if lt IE 9]>
+			<script src="js/vendor/html5shiv.js"></script>
+			<script src="js/vendor/respond.min.js"></script>
+		<![endif]-->
 
 		<link rel="stylesheet" type="text/css" href="../css/style.css" />
-
-        <link href="../bootstrap/css/bootstrap.min.css?dev=01" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        
-        <script src="../scripts/jquery-1.9.1.min.js"  ></script>
-		
 		<link rel="stylesheet" href="css/styling.css">
-       
 
+		<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+		<style type="text/css">
+			html,body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+
+			h1, .h1 {
+				color: rgb(255, 255, 255);
+			}
+
+			.btn{
+				color: rgb(255, 255, 255) !important;
+				font-size: 18px;
+    		padding-top: 8px;
+			}
+
+			/* mouse over link */
+			a:hover {
+			    text-decoration: underline;
+			}
+			.input-group-addon {
+				background-color: #797979;
+			}
+		</style>
+
+		<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+		<script src="../flatUI/js/vendor/jquery.min.js"></script>
   </head>
 
   <body>
+		<div class="wrapper">
+	    <div class="login-screen">
+				<center>
+					<h1>Inscription Associative</h1>
+					<div style="max-width:600px;">
+		        <div class="login-form">
+							<form method="post" action="../inc/createAdminAccount.php" ENCTYPE="x-www-form-urlencoded">
+			          <div class="input-group">
+			            <input type="text" class="form-control login-field"  placeholder="Entrez le nom de votre association" id="email" name="email" aria-describedby="basic-addon2">
+									<span class="input-group-addon" id="basic-addon2">@assos.utc.fr</span>
+			          </div>
+								<br>
 
-    <div class="wrapper">
-		<div class="container">
-			<div id="wrap">
-				<?php
-					include("../parts/header.php");
-				?>
-				<center><h1 style="margin-top:120px; margin-bottom:-50px;">Inscris toi MotherF***er !</h1></center>
-				
-				<div class="loginPanel">
-				
-					<form class="form" action="createAccount.php" method="post">
-						<div class="input-append">
-							<input class="span2" id="appendedInput" type="text" placeholder="Email Asso" style="height: 30px;"  name="email">
-						<span class="add-on"  style="height: 30px; color:black;">@assos.utc.fr</span>
-						</div><br>
-						<input type="password" placeholder="Password" style="height: 30px;"  name="pass1"><br>
-						<input type="password" placeholder="Password Confirm" style="height: 30px;" name="pass2"><br><br>
-						<button type="submit" id="login-button">Inscris Moi Mécréant</button><br>
-					</form>
-					
-					<div style="margin-top:-30px;">
-					
-						<?php
-							include("../parts/footer.php");
-						?>
+			          <div class="form-group">
+			            <input type="password" class="form-control login-field" value="" placeholder="Entrez votre mot de passe" id="password" name="password1">
+			            <label class="login-field-icon fui-lock" for="password"></label>
+			          </div>
+
+								<div class="form-group">
+			            <input type="password" class="form-control login-field" value="" placeholder="Répétez votre mot de passe" id="password" name="password2">
+			            <label class="login-field-icon fui-lock" for="password"></label>
+			          </div>
+
+								<input class="btn btn-primary btn-lg btn-block" type="submit" name="submit" VALUE=" Inscris moi Biatch !">
+								<a class="login-link" href="index.php">Retour au panneau de connection !</a>
+							</form>
+		        </div>
 					</div>
-				
-				</div>
-				
-				
-				
+				</center>
 			</div>
+
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
 		</div>
-		
-		<ul class="bg-bubbles">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-		
-	</div>
-	
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script src="js/index.js"></script>
- 
+
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../flatUI/js/vendor/video.js"></script>
+		<script src="../flatUI/js/flat-ui.min.js"></script>
+		<script src="js/index.js"></script>
   </body>
 </html>

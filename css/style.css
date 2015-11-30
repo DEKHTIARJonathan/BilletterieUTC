@@ -36,3 +36,20 @@ p {
 .btn-lg, .btn-group-lg>.btn {
     font-size: 15px;
 }
+
+.login-screen {
+    height: 100%;
+    background-color: initial;
+}
+
+.login-form {
+    margin-top: 10%;
+    z-index: 2;
+}
+.login-form a {
+    color: rgb(91, 86, 86);
+}
+
+.login-link {
+    color: black;
+}

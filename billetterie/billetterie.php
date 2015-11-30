@@ -2,7 +2,7 @@
 	// Page d'accueil : /index.php
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-    require_once $root.'/config.inc.php';
+	require_once $root.'/config.inc.php';
 	require_once $root.'/inc/checksession.php';
 	require_once $root.'/inc/dbconnect.php';
 
@@ -29,34 +29,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+			<title><?php echo $_CONFIG["website"]["title"]; ?></title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+			<!-- Loading Bootstrap -->
+			<link href="../flatUI/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <title> Billetterie UTC </title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<!-- Loading Flat UI -->
+			<link href="../flatUI/css/flat-ui.min.css" rel="stylesheet">
 
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+			<link rel="shortcut icon" href="../img/favicon.ico">
 
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-              }
-        </style>
+			<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+			<!--[if lt IE 9]>
+				<script src="js/vendor/html5shiv.js"></script>
+				<script src="js/vendor/respond.min.js"></script>
+			<![endif]-->
 
-        <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+			<link rel="stylesheet" type="text/css" href="../css/style.css" />
 
-        <script src="../scripts/jquery-1.9.1.min.js"  ></script>
-        <!-- <script type="text/javascript" src="scripts/general.js" charset="utf-8"></script> -->
+			<!-- <link href="bootflat/css/bootflat.min.css" rel="stylesheet" type="text/css" /> -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
+			<style type="text/css">
+				body {
+					padding-top: 60px;
+					padding-bottom: 40px;
+				}
+			</style>
+
+			<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+			<script src="../flatUI/js/vendor/jquery.min.js"></script>
     </head>
     <body>
 
       <div class="container">
         <?php
-            include("../parts/header.php");
+            include("../parts/header2.php");
         ?>
 
         <div class="container">
@@ -71,7 +81,7 @@
 			</div>
 
 			<div class="row">
-				<div class="span5">
+				<div class="col-md-5">
 				<?php
 
 
@@ -81,7 +91,7 @@
 
 
 				</div>
-				<div class="span7">
+				<div class="col-md-7">
 					<table class="table">
 						<thead>
 						  <tr>
@@ -125,7 +135,6 @@
 
 									echo '</select></div></td>';
 									echo '<td><button type="button" class="btn btn-success">Acheter</button></td>';
-									echo '<td>'.$name.'</td>';
 									echo '</tr>';
 								}
 							?>
@@ -155,7 +164,8 @@
 
         </div>
 
-        <script src="../bootstrap/js/bootstrap-modal.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-    </body>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="../flatUI/js/vendor/video.js"></script>
+		<script src="../flatUI/js/flat-ui.min.js"></script>
+  </body>
 </html>

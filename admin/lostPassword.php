@@ -60,6 +60,9 @@
 			a:hover {
 			    text-decoration: underline;
 			}
+			.input-group-addon {
+				background-color: #797979;
+			}
 		</style>
 
 		<!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
@@ -70,24 +73,18 @@
 		<div class="wrapper">
 	    <div class="login-screen">
 				<center>
-					<h1>Panneau d'Administration</h1>
+					<h1>Récupération mot de passe</h1>
 					<div style="max-width:600px;">
 		        <div class="login-form">
-							<form method="post" action="../inc/connectAdmin.php" ENCTYPE="x-www-form-urlencoded">
-			          <div class="form-group">
-			            <input type="text" class="form-control login-field" value="" placeholder="Entrez votre email associatif" id="email" name="email">
-			            <label class="login-field-icon fui-user" for="email"></label>
+							<form method="post" action="../inc/createAdminAccount.php" ENCTYPE="x-www-form-urlencoded">
+			          <div class="input-group">
+			            <input type="text" class="form-control login-field"  placeholder="Entrez le nom de votre association" id="email" name="email" aria-describedby="basic-addon2">
+									<span class="input-group-addon" id="basic-addon2">@assos.utc.fr</span>
 			          </div>
+					  <br>
 
-			          <div class="form-group">
-			            <input type="password" class="form-control login-field" value="" placeholder="Entrez votre mot de passe" id="password" name="password">
-			            <label class="login-field-icon fui-lock" for="password"></label>
-			          </div>
-
-								<input class="btn btn-primary btn-lg btn-block" type="submit" name="submit" VALUE=" Connecte moi Biatch !">
-			          <br>
-								<a class="login-link" href="subscribe.php">Je veux créer un compte associatif vieu bougre !</a>
-								<a class="login-link" href="lostPassword.php">Damned ! J'ai perdu mon mot de passe...</a>
+								<input class="btn btn-primary btn-lg btn-block" type="submit" name="submit" VALUE=" Inscris moi Biatch !">
+								<a class="login-link" href="index.php">Retour au panneau de connection !</a>
 							</form>
 		        </div>
 					</div>
