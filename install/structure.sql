@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 29 Novembre 2015 à 11:28
+-- Généré le :  Mer 02 Décembre 2015 à 09:25
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -15,33 +15,47 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `billetterie_utc`
 --
-
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `assos`
 --
--- Création :  Dim 29 Novembre 2015 à 04:49
+-- Création :  Mar 01 Décembre 2015 à 17:29
 --
 
 DROP TABLE IF EXISTS `assos`;
 CREATE TABLE IF NOT EXISTS `assos` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(40) NOT NULL,
-  `verified` tinyint(1) NOT NULL,
-  `verif_key` varchar(40) NOT NULL,
+  `payutcKey` varchar(255) NOT NULL,
   PRIMARY KEY (`name`),
-  UNIQUE KEY `verif_key` (`verif_key`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `payutcKey` (`payutcKey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `assos`
 --
 
-INSERT INTO `assos` (`name`, `email`, `password`, `verified`, `verif_key`) VALUES
-('billetterie', 'billetterie@assos.utc.fr', 'bc05063b0a126b900fa25c8de404391742f87e92', 1, 'bc05063b0a126b900fa25c8de404391742f87e92');
+INSERT INTO `assos` (`name`, `email`, `payutcKey`) VALUES
+('billetterie', 'billetterie@assos.utc.fr', 'bc05063b0a126b900fa25c8de404391742f87e92');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `asso_assoc`
+--
+-- Création :  Mar 01 Décembre 2015 à 18:25
+--
+
+DROP TABLE IF EXISTS `asso_assoc`;
+CREATE TABLE IF NOT EXISTS `asso_assoc` (
+  `login` varchar(8) NOT NULL DEFAULT '',
+  `association` varchar(255) NOT NULL DEFAULT '',
+  `role` enum('President','Tresorier','Membre') DEFAULT NULL,
+  PRIMARY KEY (`login`,`association`),
+  KEY `fk_asso_assoc` (`association`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -64,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   KEY `assoID` (`asso`),
   KEY `eventName` (`eventName`),
   KEY `eventDate` (`eventDate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `events`
@@ -75,6 +89,29 @@ INSERT INTO `events` (`eventID`, `asso`, `eventName`, `eventDate`, `eventFlyer`,
 (2, 'billetterie', 'Hackathon UTC', '2015-12-18', 'images/upload/affiche2.jpg', 70, 'Centre d''innovation'),
 (3, 'billetterie', 'Ski UTC', '2016-02-01', 'images/upload/affiche3.jpg', 400, 'Alpes'),
 (7, 'billetterie', 'Estu Halloween', '2015-11-05', 'images/upload/wZ73PmTtNK09F0qH8tCa.png', 987, 'Dream Famous Club');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `people`
+--
+-- Création :  Mar 01 Décembre 2015 à 17:39
+--
+
+DROP TABLE IF EXISTS `people`;
+CREATE TABLE IF NOT EXISTS `people` (
+  `login` varchar(8) NOT NULL,
+  `role` enum('Administrateur','Utilisateur') NOT NULL,
+  PRIMARY KEY (`login`),
+  KEY `role` (`role`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `people`
+--
+
+INSERT INTO `people` (`login`, `role`) VALUES
+('jdekhtia', 'Administrateur');
 
 -- --------------------------------------------------------
 
@@ -104,11 +141,11 @@ CREATE TABLE IF NOT EXISTS `tarifs` (
 INSERT INTO `tarifs` (`tarifID`, `eventID`, `tarifName`, `price`, `maxSold`, `maxByUser`) VALUES
 (1, 1, 'Cotisant BDE-UTC', 7, 700, 1),
 (2, 1, 'Non Cotisant BDE-UTC', 9, 400, 1),
-(3, 1, 'Extérieur', 11, 200, 5),
-(4, 2, 'Extérieur', 11, 300, 5),
+(3, 1, 'ExtÃ©rieur', 11, 200, 5),
+(4, 2, 'ExtÃ©rieur', 11, 300, 5),
 (5, 2, 'Cotisant BDE-UTC', 8, 200, 1),
 (6, 2, 'Non Cotisant BDE-UTC', 5, 150, 1),
-(7, 3, 'Extérieur', 15, 800, 5),
+(7, 3, 'ExtÃ©rieur', 15, 800, 5),
 (8, 3, 'Cotisant BDE-UTC', 6.4, 200, 1),
 (9, 3, 'Non Cotisant BDE-UTC', 3, 100, 1);
 
@@ -134,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `tariftypes` (
 
 INSERT INTO `tariftypes` (`tarifName`, `cotisant`, `utc`) VALUES
 ('Cotisant BDE-UTC', 1, 1),
-('Extérieur', 0, 0),
+('ExtÃ©rieur', 0, 0),
 ('Non Cotisant BDE-UTC', 0, 1);
 
 -- --------------------------------------------------------
@@ -142,7 +179,7 @@ INSERT INTO `tariftypes` (`tarifName`, `cotisant`, `utc`) VALUES
 --
 -- Structure de la table `tickets`
 --
--- Création :  Dim 29 Novembre 2015 à 06:29
+-- Création :  Dim 29 Novembre 2015 à 10:29
 --
 
 DROP TABLE IF EXISTS `tickets`;
@@ -190,6 +227,13 @@ INSERT INTO `tickets` (`ticketID`, `tarifName`, `eventID`, `buyerLogin`, `ticket
 --
 
 --
+-- Contraintes pour la table `asso_assoc`
+--
+ALTER TABLE `asso_assoc`
+  ADD CONSTRAINT `fk_asso_assoc` FOREIGN KEY (`association`) REFERENCES `assos` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_login` FOREIGN KEY (`login`) REFERENCES `people` (`login`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Contraintes pour la table `events`
 --
 ALTER TABLE `events`
@@ -199,8 +243,8 @@ ALTER TABLE `events`
 -- Contraintes pour la table `tarifs`
 --
 ALTER TABLE `tarifs`
-  ADD CONSTRAINT `fk_tariftype` FOREIGN KEY (`tarifName`) REFERENCES `tariftypes` (`tarifName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_event` FOREIGN KEY (`eventID`) REFERENCES `events` (`eventID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_event` FOREIGN KEY (`eventID`) REFERENCES `events` (`eventID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tariftype` FOREIGN KEY (`tarifName`) REFERENCES `tariftypes` (`tarifName`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `tickets`
