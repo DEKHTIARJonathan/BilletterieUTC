@@ -5,7 +5,25 @@
   require_once $root.'/config.inc.php';
 	require_once $root.'/inc/checksession.php';
 	require_once $root.'/inc/dbconnect.php';
+/*
+$matrix = $api->getAllEvents();
+
+foreach ($matrix as &$row) {
+	echo $row["id"]."<br>";
+	echo $row["name"]."<br>";
+	echo $row["asso"]."<br>";
+	echo $row["date"]."<br>";
+	echo $row["location"]."<br>";
+	echo $row["eventFlyer"]."<br>";
+	echo $row["maxTickets"]."<br>";
+	echo $row["ticketsLeft"]."<br>";
+}
+
+*/
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html>

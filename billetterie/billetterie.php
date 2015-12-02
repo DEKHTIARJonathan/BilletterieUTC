@@ -3,24 +3,26 @@
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	require_once $root.'/config.inc.php';
-	require_once $root.'/inc/checksession.php';
-	require_once $root.'/inc/dbconnect.php';
+	//require_once $root.'/inc/checksession.php';
+	//require_once $root.'/inc/dbconnect.php';
+
+	require_once $root.'/inc/API.php';
+
+	$api = new API();
+	/*
+
+	*/
 
 	$eventID = isset($_GET['eventID']) ? $_GET['eventID'] : '';
+
 	if ($eventID == "")
-		header('Location: '.$_CONFIG['home']."billetterie/");
+		header('Location: '.$_CONFIG["website"]['home']."billetterie/");
 	else{
-		$sth = $connexion->prepare('SELECT `t1`.`eventFlyer`, `t1`.`eventName`, `t2`.`placeLeft` FROM `events` as `t1`, (SELECT events.eventTicketMax - (SELECT COUNT(*) FROM `tickets`) as `placeLeft`, `eventID` FROM `events`) as `t2` WHERE `t2`.`eventID` = `t1`.`eventID` and `t1`.`eventID` = :eventID');
+		$row = $api->getEventInfos($eventID);
 
-		$sth->bindParam(':eventID', $eventID);
-
-		$sth->execute();
-		$row = $sth->fetch();
-
+		$name = $row["eventName"];
 		$flyer = $row["eventFlyer"];
 		$placeLeft = $row["placeLeft"];
-		$name = $row["eventName"];
-
 	}
 
 
@@ -103,14 +105,10 @@
 						</thead>
 						<tbody>
 							<?php
-								$sth = $connexion->prepare('SELECT * FROM `tarifs` WHERE `eventID` = :eventID');
-								$sth->bindParam(':eventID', $eventID);
-
-								$sth->execute();
+								$matrix = $api->getAllTarifsByEvent($eventID);
 
 								$i = 0;
-
-								while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+								foreach ($matrix as &$row) {
 									$tarifID = $row["tarifID"];
 									$eventID = $row["eventID"];
 									$name = $row["tarifName"];

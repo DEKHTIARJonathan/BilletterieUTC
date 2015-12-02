@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 02 Décembre 2015 à 09:25
+-- Généré le :  Jeu 03 Décembre 2015 à 00:27
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -15,12 +15,13 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `billetterie_utc`
 --
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `assos`
 --
--- Création :  Mar 01 Décembre 2015 à 17:29
+-- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `assos`;
@@ -31,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `assos` (
   PRIMARY KEY (`name`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `payutcKey` (`payutcKey`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `assos`
@@ -45,7 +46,7 @@ INSERT INTO `assos` (`name`, `email`, `payutcKey`) VALUES
 --
 -- Structure de la table `asso_assoc`
 --
--- Création :  Mar 01 Décembre 2015 à 18:25
+-- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `asso_assoc`;
@@ -55,14 +56,14 @@ CREATE TABLE IF NOT EXISTS `asso_assoc` (
   `role` enum('President','Tresorier','Membre') DEFAULT NULL,
   PRIMARY KEY (`login`,`association`),
   KEY `fk_asso_assoc` (`association`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `events`
 --
--- Création :  Dim 29 Novembre 2015 à 06:54
+-- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `events`;
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   KEY `assoID` (`asso`),
   KEY `eventName` (`eventName`),
   KEY `eventDate` (`eventDate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `events`
@@ -95,7 +96,7 @@ INSERT INTO `events` (`eventID`, `asso`, `eventName`, `eventDate`, `eventFlyer`,
 --
 -- Structure de la table `people`
 --
--- Création :  Mar 01 Décembre 2015 à 17:39
+-- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `people`;
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `people` (
   `role` enum('Administrateur','Utilisateur') NOT NULL,
   PRIMARY KEY (`login`),
   KEY `role` (`role`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `people`
@@ -118,7 +119,7 @@ INSERT INTO `people` (`login`, `role`) VALUES
 --
 -- Structure de la table `tarifs`
 --
--- Création :  Dim 29 Novembre 2015 à 05:52
+-- Création :  Mer 02 Décembre 2015 à 23:26
 --
 
 DROP TABLE IF EXISTS `tarifs`;
@@ -132,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `tarifs` (
   PRIMARY KEY (`tarifID`),
   KEY `eventID` (`eventID`,`tarifName`),
   KEY `tarifName` (`tarifName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `tarifs`
@@ -141,11 +142,11 @@ CREATE TABLE IF NOT EXISTS `tarifs` (
 INSERT INTO `tarifs` (`tarifID`, `eventID`, `tarifName`, `price`, `maxSold`, `maxByUser`) VALUES
 (1, 1, 'Cotisant BDE-UTC', 7, 700, 1),
 (2, 1, 'Non Cotisant BDE-UTC', 9, 400, 1),
-(3, 1, 'ExtÃ©rieur', 11, 200, 5),
-(4, 2, 'ExtÃ©rieur', 11, 300, 5),
+(3, 1, 'Extérieur', 11, 200, 5),
+(4, 2, 'Extérieur', 11, 300, 5),
 (5, 2, 'Cotisant BDE-UTC', 8, 200, 1),
 (6, 2, 'Non Cotisant BDE-UTC', 5, 150, 1),
-(7, 3, 'ExtÃ©rieur', 15, 800, 5),
+(7, 3, 'Extérieur', 15, 800, 5),
 (8, 3, 'Cotisant BDE-UTC', 6.4, 200, 1),
 (9, 3, 'Non Cotisant BDE-UTC', 3, 100, 1);
 
@@ -154,7 +155,7 @@ INSERT INTO `tarifs` (`tarifID`, `eventID`, `tarifName`, `price`, `maxSold`, `ma
 --
 -- Structure de la table `tariftypes`
 --
--- Création :  Dim 29 Novembre 2015 à 05:16
+-- Création :  Mer 02 Décembre 2015 à 23:26
 --
 
 DROP TABLE IF EXISTS `tariftypes`;
@@ -163,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `tariftypes` (
   `cotisant` tinyint(1) NOT NULL,
   `utc` tinyint(1) NOT NULL,
   PRIMARY KEY (`tarifName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `tariftypes`
@@ -171,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tariftypes` (
 
 INSERT INTO `tariftypes` (`tarifName`, `cotisant`, `utc`) VALUES
 ('Cotisant BDE-UTC', 1, 1),
-('ExtÃ©rieur', 0, 0),
+('Extérieur', 0, 0),
 ('Non Cotisant BDE-UTC', 0, 1);
 
 -- --------------------------------------------------------
@@ -179,7 +180,7 @@ INSERT INTO `tariftypes` (`tarifName`, `cotisant`, `utc`) VALUES
 --
 -- Structure de la table `tickets`
 --
--- Création :  Dim 29 Novembre 2015 à 10:29
+-- Création :  Mer 02 Décembre 2015 à 23:26
 --
 
 DROP TABLE IF EXISTS `tickets`;
@@ -194,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   KEY `eventID` (`eventID`),
   KEY `buyerLogin` (`buyerLogin`),
   KEY `ticketKey` (`ticketKey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Contenu de la table `tickets`

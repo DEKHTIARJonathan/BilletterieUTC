@@ -1,20 +1,23 @@
 <?php
 
+	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+
 	// Paramètres de BDD
-	$_CONFIG['sql_host'] = "localhost";
-	$_CONFIG['sql_db'] = "billetterie_utc";
-	$_CONFIG['sql_user'] = "root";
-	$_CONFIG['sql_pass'] = "";
-	$_CONFIG['sql_port'] = 3306;
+	$_CONFIG['db']['host'] = "localhost";
+	$_CONFIG['db']['name'] = "billetterie_utc";
+	$_CONFIG['db']['user'] = "root";
+	$_CONFIG['db']['pass'] = "##########################";
+	$_CONFIG['db']['port'] = 3306;
+
+	$_CONFIG["website"]["title"] = "Billetterie UTC";
+	$_CONFIG["website"]['home'] = "http://localhost/";
+	$_CONFIG["website"]['uploadPath'] = $root.'/images/upload/';
 
 	// Chemin vers le serveur CAS (avec le / final)
-	$_CONFIG['cas_url'] = "https://cas.utc.fr/cas/";
-	$_CONFIG['home'] = "http://localhost/";
-	$_CONFIG['service'] = $_CONFIG['home']."inc/connect.php";
-	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-	$_CONFIG['uploadPath'] = $root.'/images/upload/';
-	
-	$_CONFIG['ginger']["key"] = "###################################";
+	$_CONFIG["cas"]["url"] = "https://cas.utc.fr/cas/";
+	$_CONFIG["cas"]["service"] = $_CONFIG["website"]['home']."inc/connect.php";
+
+	$_CONFIG['ginger']["key"] = "#####################################";
 	$_CONFIG['ginger']["url"] = "https://assos.utc.fr/ginger_dev/v1/";
 
 ?>
