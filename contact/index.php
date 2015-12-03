@@ -4,7 +4,6 @@
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
   require_once $root.'/config.inc.php';
 	require_once $root.'/inc/checksession.php';
-	require_once $root.'/inc/dbconnect.php';
 ?>
 
 <!DOCTYPE html>
@@ -71,8 +70,7 @@
 					<div class="col-md-5" style="margin-top:15px; text-align:right;">
 						<?php
 							require_once('recaptchalib.php');
-							require_once('mail_conf.inc.php');
-							echo recaptcha_get_html($publickey);
+							echo recaptcha_get_html($_CONFIG['email']["captcha"]["public"]);
 						?>
 					</div>
 					<div class="col-md-5 col-sm-push-1" style=" margin-top:65px;">

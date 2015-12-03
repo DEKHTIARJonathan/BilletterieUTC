@@ -18,7 +18,7 @@
         global $_CONFIG;
 
         $ticket = $_GET["ticket"];
-		$service = $_CONFIG["cas"]["service"];
+		    $service = $_CONFIG["cas"]["service"];
 
         $login = Cas::authenticate($ticket, $service);
 

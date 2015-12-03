@@ -3,15 +3,10 @@
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	require_once $root.'/config.inc.php';
-	//require_once $root.'/inc/checksession.php';
-	//require_once $root.'/inc/dbconnect.php';
-
+	require_once $root.'/inc/checksession.php';
 	require_once $root.'/inc/API.php';
 
 	$api = new API();
-	/*
-
-	*/
 
 	$eventID = isset($_GET['eventID']) ? $_GET['eventID'] : '';
 
@@ -24,7 +19,6 @@
 		$flyer = $row["eventFlyer"];
 		$placeLeft = $row["placeLeft"];
 	}
-
 
 ?>
 
@@ -85,10 +79,7 @@
 			<div class="row">
 				<div class="col-md-5">
 				<?php
-
-
-
-					echo '<img src="../'.$flyer.'" alt="affiche-evenement">';
+					echo '<img src="../'.$flyer.'" alt="affiche-evenement" style="max-height:100%; max-width:100%;">';
 				?>
 
 

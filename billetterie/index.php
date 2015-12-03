@@ -2,28 +2,17 @@
 	// Page d'accueil : /index.php
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-  require_once $root.'/config.inc.php';
+	require_once $root.'/config.inc.php';
 	require_once $root.'/inc/checksession.php';
-	require_once $root.'/inc/dbconnect.php';
-/*
-$matrix = $api->getAllEvents();
+	require_once $root.'/inc/API.php';
 
-foreach ($matrix as &$row) {
-	echo $row["id"]."<br>";
-	echo $row["name"]."<br>";
-	echo $row["asso"]."<br>";
-	echo $row["date"]."<br>";
-	echo $row["location"]."<br>";
-	echo $row["eventFlyer"]."<br>";
-	echo $row["maxTickets"]."<br>";
-	echo $row["ticketsLeft"]."<br>";
-}
+	$api = new API();
 
-*/
+	$eventID = isset($_GET['eventID']) ? $_GET['eventID'] : '';
+
+	$matrix = $api->getAllEvents();
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -85,21 +74,17 @@ foreach ($matrix as &$row) {
 
 						<?php
 
-							$sth = $connexion->prepare('SELECT `t1`.`eventID`, `t1`.`asso`, `t1`.`eventName`, `t1`.`eventDate`, `t1`.`eventFlyer`, `t1`.`eventTicketMax`, `t1`.`location`, `t2`.`placeLeft` FROM `events` as `t1`, (SELECT events.eventTicketMax - (SELECT COUNT(*) FROM `tickets`) as `placeLeft`, `eventID` FROM `events`) as `t2` WHERE `eventDate` >= CURDATE() and `t2`.`eventID` = `t1`.`eventID` order by `eventDate`;');
-
-              $sth->execute();
-
 							$i = 0;
 
-              while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
-								$id = $row["eventID"];
-								$name = $row["eventName"];
+							foreach ($matrix as &$row) {
+								$id = $row["id"];
+								$name = $row["name"];
 								$asso = $row["asso"];
-								$date = $row["eventDate"];
+								$date = $row["date"];
 								$location = $row["location"];
 								$eventFlyer = $row["eventFlyer"];
-								$maxTickets = $row["eventTicketMax"];
-								$ticketsLeft = $row["placeLeft"];
+								$maxTickets = $row["maxTickets"];
+								$ticketsLeft = $row["ticketsLeft"];
 
 								if ($i % 3 == 0)
 									echo '<tr class="success">';
@@ -107,7 +92,7 @@ foreach ($matrix as &$row) {
 									echo '<tr class="warning">';
 								else
 									echo '<tr class="info">';
-								$i = $i +1;
+								$i += 1;
 
 								echo'<td><div class="span3"><img src="../'.$eventFlyer.'" alt="affiche-evenement style="width=200px;height=200px"></div></td>
 									 <td><div class="span6"><br><h3><center>'.$name.' @ '.$location.'<br>- '.$date.' -<br> <br> nombre de place restantes : '.$ticketsLeft.' </center></h3></div></td>
@@ -115,6 +100,7 @@ foreach ($matrix as &$row) {
 									 </tr>';
 
 							}
+
 						?>
 						</tbody>
 					  </table>

@@ -5,9 +5,8 @@
 
  	session_start();
 	if( !isset($_SESSION['login']) || $_SESSION['login'] == '' ) {
-
-    	$currentAddr = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
-    	if ($currentAddr != $_CONFIG["website"]['home'])
-    		header('Location: '.$_CONFIG["website"]['home']);
-    }
+  	$currentAddr = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+  	if ($currentAddr != $_CONFIG["website"]['home'])
+  	header('Location: '.$_CONFIG["website"]['home']);
+  }
 ?>
