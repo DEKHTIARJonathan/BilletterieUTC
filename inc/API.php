@@ -171,6 +171,18 @@ class API {
 		return $sth->fetch()[0];
 	}
 
+	public function checkRights($login, $asso){
+		$sth = $this->connexion->prepare('SELECT CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `hasRight` FROM `asso_assoc` as `t1`, `people` as `t2` WHERE `association` = :asso and (`t1`.`login` = :login1 or (`t2`.`role` = "admin" and `t2`.`login` = :login2))');
+
+		$sth->bindParam(':login1', $login);
+		$sth->bindParam(':login2', $login);
+		$sth->bindParam(':asso', $asso);
+		$sth->execute();
+
+		return filter_var($sth->fetch()["hasRight"], FILTER_VALIDATE_BOOLEAN);
+	}
 }
+
+
 
 ?>

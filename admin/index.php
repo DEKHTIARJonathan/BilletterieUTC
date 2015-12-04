@@ -3,7 +3,19 @@
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	require_once $root.'/config.inc.php';
+	require_once $root.'/inc/API.php';
 	require_once $root.'/inc/checkadmin.php';
+
+	$api = new API();
+
+	$asso = isset($_GET['asso']) ? $_GET['asso'] : '';
+	if ($asso != ''){
+		if (!$api->checkRights($_SESSION['login'], $asso))
+			$asso = $_SESSION['assos'][0];
+	}
+	else
+		$asso = $_SESSION['assos'][0];
+
 ?>
 
 <!doctype html>
@@ -44,8 +56,6 @@
 		<?php
 			include("parts/menu.php");
 		?>
-
-
 
 		<div class="main-content">
 
@@ -653,50 +663,33 @@
 			</div>
 		</div>
 	</div><!-- Imported styles on this page -->
-	<link href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css" id=
-	"style-resource-1" rel="stylesheet">
-	<link href="assets/js/rickshaw/rickshaw.min.css" id="style-resource-2" rel=
-	"stylesheet">
-	<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js">
-	</script>
-	<script id="script-resource-2" src=
-	"assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js">
-	</script>
-	<script id="script-resource-3" src="assets/js/bootstrap.js">
-	</script>
-	<script id="script-resource-4" src="assets/js/joinable.js">
-	</script>
-	<script id="script-resource-5" src="assets/js/resizeable.js">
-	</script>
-	<script id="script-resource-6" src="assets/js/neon-api.js">
-	</script>
-	<script id="script-resource-7" src="assets/js/cookies.min.js">
-	</script>
-	<script id="script-resource-8" src=
-	"assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js">
-	</script>
-	<script id="script-resource-9" src=
-	"assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js">
-	</script>
-	<script id="script-resource-10" src="assets/js/jquery.sparkline.min.js">
-	</script>
-	<script id="script-resource-11" src="assets/js/rickshaw/vendor/d3.v3.js">
-	</script>
-	<script id="script-resource-12" src="assets/js/rickshaw/rickshaw.min.js">
-	</script>
-	<script id="script-resource-13" src="assets/js/raphael-min.js">
-	</script>
-	<script id="script-resource-14" src="assets/js/morris.min.js">
-	</script>
-	<script id="script-resource-15" src="assets/js/toastr.js">
-	</script>
-	<script id="script-resource-16" src="assets/js/neon-chat.js">
-	</script> <!-- JavaScripts initializations and stuff -->
-	<script id="script-resource-17" src="assets/js/neon-custom.js">
-	</script> <!-- Demo Settings -->
-	<script id="script-resource-18" src="assets/js/neon-demo.js">
-	</script>
-	<script id="script-resource-19" src="assets/js/neon-skins.js">
+	<link href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css" id="style-resource-1" rel="stylesheet">
+	<link href="assets/js/rickshaw/rickshaw.min.css" id="style-resource-2" rel="stylesheet">
+
+	<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
+	<script id="script-resource-2" src=	"assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script id="script-resource-3" src="assets/js/bootstrap.js"></script>
+	<script id="script-resource-4" src="assets/js/joinable.js"></script>
+	<script id="script-resource-5" src="assets/js/resizeable.js"></script>
+	<script id="script-resource-6" src="assets/js/neon-api.js"></script>
+	<script id="script-resource-7" src="assets/js/cookies.min.js"></script>
+	<script id="script-resource-8" src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	<script id="script-resource-9" src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
+	<script id="script-resource-10" src="assets/js/jquery.sparkline.min.js"></script>
+	<script id="script-resource-11" src="assets/js/rickshaw/vendor/d3.v3.js"></script>
+	<script id="script-resource-12" src="assets/js/rickshaw/rickshaw.min.js"></script>
+	<script id="script-resource-13" src="assets/js/raphael-min.js"></script>
+	<script id="script-resource-14" src="assets/js/morris.min.js"></script>
+	<script id="script-resource-15" src="assets/js/toastr.js"></script>
+	<script id="script-resource-16" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
+	<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
+	<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
+	<script id="script-resource-19" src="assets/js/neon-skins.js"></script>
+
+	<script>
+		<?php
+			echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);';
+		?>
 	</script>
 </body>
 </html>

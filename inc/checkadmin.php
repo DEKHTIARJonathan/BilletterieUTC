@@ -12,19 +12,22 @@
 
   if ($role == "admin"){
     $_SESSION['admin'] = True;
-    $_SESSION['assos'] = "";
-    $_SESSION['roles'] = "";
+
+		$array = $api->getAllAssos();
+		for ($i = 0; $i < sizeof($array); $i ++){
+			$_SESSION['assos'][$i] = $array[$i];
+			$_SESSION['roles'][$i] = "admin";
+		}
+
   } elseif ($role == "user") {
     $_SESSION['admin'] = False;
 
     $matrix = $api->getAssosRoles($_SESSION['login']);
 
-    if (sizeof($matrix['association']) > 0){
-  		for ($i = 0; $i < sizeof($matrix['association']); $i ++){
-  			$_SESSION['assos'][$i] = $matrix['association'][$i];
-  			$_SESSION['roles'][$i] = $matrix['role'][$i];
-  		}
-    }
+		for ($i = 0; $i < sizeof($matrix['association']); $i ++){
+			$_SESSION['assos'][$i] = $matrix['association'][$i];
+			$_SESSION['roles'][$i] = $matrix['role'][$i];
+		}
 
   } else
     header('Location: '.$_CONFIG["website"]['home']);

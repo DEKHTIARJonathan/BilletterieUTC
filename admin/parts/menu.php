@@ -32,7 +32,7 @@
 		</header>
 		<div style="margin-left:25px;">
 			Mon Association :&nbsp;
-			<select class="selectboxit visible" style="width:140px;">
+			<select class="selectboxit visible" style="width:138px;" id="assoSelect">
 				<optgroup label="Mes Associations">
 					<?php
 						if(!$_SESSION['admin']){
@@ -88,6 +88,9 @@
 			</li>
 			<li class="root-level">
 				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-users"></i><span class="title">Gérer mes événements</span></a>
+			</li>
+			<li class="root-level">
+				<a href="<?php echo $_CONFIG["website"]['home']; ?>"><i class="entypo-logout"></i><span class="title">Retour sur la Billetterie</span></a>
 			</li>
 			<li class="root-level">
 				<a href="<?php echo $pre_url; ?>../inc/disconnect.php"><i class="entypo-logout"></i><span class="title">Déconnexion</span></a>
