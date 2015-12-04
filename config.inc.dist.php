@@ -1,5 +1,7 @@
 <?php
 
+	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+	
 	// Paramètres de BDD
 	$_CONFIG['db']['host'] = "localhost";
 	$_CONFIG['db']['name'] = "billetterie_utc";
