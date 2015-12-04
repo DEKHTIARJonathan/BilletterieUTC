@@ -72,8 +72,6 @@
 			<div class="page-header">
 				<a href="#" id="logout" class="btn btn-danger pull-right" style="display: none;"> Logout </a>
 				<h1><center><?php echo $name; ?></center></h1>
-
-
 			</div>
 
 			<div class="row">
@@ -81,7 +79,6 @@
 				<?php
 					echo '<img src="../'.$flyer.'" alt="affiche-evenement" style="max-height:100%; max-width:100%;">';
 				?>
-
 
 				</div>
 				<div class="col-md-7">
@@ -149,7 +146,6 @@
                 <div class="modal-body" id="modal-body">
                 </div>
             </div>
-
 
         </div>
 

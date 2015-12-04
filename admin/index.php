@@ -4,7 +4,6 @@
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	require_once $root.'/config.inc.php';
 	require_once $root.'/inc/checkadmin.php';
-
 ?>
 
 <!doctype html>
@@ -28,6 +27,7 @@
 	<link href="assets/css/neon-core.css" id="style-resource-5" rel="stylesheet">
 	<link href="assets/css/neon-theme.css" id="style-resource-6" rel="stylesheet">
 	<link href="assets/css/neon-forms.css" id="style-resource-7" rel="stylesheet">
+	<link href="assets/css/style.css" id="style-resource-7" rel="stylesheet">
 	<script src="assets/js/jquery-1.11.3.min.js">
 	</script>
 	<!--[if lt IE 9]>
@@ -52,26 +52,6 @@
 			<script type="text/javascript">
 			jQuery(document).ready(function($)
 			{
-			// Sample Toastr Notification
-			setTimeout(function()
-			{
-			var opts = {
-			"closeButton": true,
-			"debug": false,
-			"positionClass": rtl() || public_vars.$pageContainer.hasClass('right-sidebar') ? "toast-top-left" : "toast-top-right",
-			"toastClass": "black",
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-			};
-			toastr.success("You have been awarded with 1 year free subscription. Enjoy it!", "Account Subcription Updated", opts);
-			}, 3000);
 
 			// Sparkline Charts
 			$('.inlinebar').sparkline('html', {type: 'bar', barColor: '#ff6264'} );
@@ -213,12 +193,12 @@
 						<div class="icon">
 							<i class="entypo-users"></i>
 						</div>
-						<div class="num" data-delay="0" data-duration="1500" data-end="83"
+						<div class="num" data-delay="0" data-duration="1500" data-end="<?php echo $api->getAssosCount(); ?>"
 						data-postfix="" data-start="0">
 							0
 						</div>
-						<h3>Registered users</h3>
-						<p>so far in our blog, and our website.</p>
+						<h3>Associations</h3>
+						<p>utilisent notre plateforme.</p>
 					</div>
 				</div>
 				<div class="col-sm-3 col-xs-6">
@@ -226,12 +206,12 @@
 						<div class="icon">
 							<i class="entypo-chart-bar"></i>
 						</div>
-						<div class="num" data-delay="600" data-duration="1500" data-end="135"
+						<div class="num" data-delay="600" data-duration="1500" data-end="<?php echo $api->getEventsCount(); ?>"
 						data-postfix="" data-start="0">
 							0
 						</div>
-						<h3>Daily Visitors</h3>
-						<p>this is the average value.</p>
+						<h3>ÉVENEMENTS</h3>
+						<p>organisés via notre plateforme.</p>
 					</div>
 				</div>
 				<div class="clear visible-xs"></div>
@@ -240,12 +220,12 @@
 						<div class="icon">
 							<i class="entypo-mail"></i>
 						</div>
-						<div class="num" data-delay="1200" data-duration="1500" data-end="23"
+						<div class="num" data-delay="1200" data-duration="1500" data-end="<?php echo $api->getTicketsSoldCount(); ?>"
 						data-postfix="" data-start="0">
 							0
 						</div>
-						<h3>New Messages</h3>
-						<p>messages per day.</p>
+						<h3>TICKETS</h3>
+						<p>vendus sur notre plateforme.</p>
 					</div>
 				</div>
 				<div class="col-sm-3 col-xs-6">
@@ -253,12 +233,12 @@
 						<div class="icon">
 							<i class="entypo-rss"></i>
 						</div>
-						<div class="num" data-delay="1800" data-duration="1500" data-end="52"
+						<div class="num" data-delay="1800" data-duration="1500" data-end="<?php echo $api->getPeopleCount(); ?>"
 						data-postfix="" data-start="0">
 							0
 						</div>
-						<h3>Subscribers</h3>
-						<p>on our site right now.</p>
+						<h3>PERSONNES</h3>
+						<p>utilisent notre plateforme.</p>
 					</div>
 				</div>
 			</div><br>

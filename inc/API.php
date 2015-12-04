@@ -22,6 +22,30 @@ class API {
   }
 
 	public function getAllEvents(){
+		$sth = $this->connexion->prepare('SELECT `t1`.`eventID`, `t1`.`asso`, `t1`.`eventName`, `t1`.`eventDate`, `t1`.`eventFlyer`, `t1`.`eventTicketMax`, `t1`.`location`, `t2`.`placeLeft` FROM `events` as `t1`, (SELECT events.eventTicketMax - (SELECT COUNT(*) FROM `tickets`) as `placeLeft`, `eventID` FROM `events`) as `t2` WHERE `t2`.`eventID` = `t1`.`eventID` order by `eventDate`;');
+
+		$sth->execute();
+
+		$i = 0;
+
+		$matrix;
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+			$matrix["id"][$i] = $row["eventID"];
+			$matrix["name"][$i] = $row["eventName"];
+			$matrix["asso"][$i] = $row["asso"];
+			$matrix["date"][$i] = $row["eventDate"];
+			$matrix["location"][$i] = $row["location"];
+			$matrix["eventFlyer"][$i] = $row["eventFlyer"];
+			$matrix["maxTickets"][$i] = $row["eventTicketMax"];
+			$matrix["ticketsLeft"][$i] = $row["placeLeft"];
+			$i ++;
+		}
+
+		return $matrix;
+	}
+
+	public function getAllEventsAlived(){
 		$sth = $this->connexion->prepare('SELECT `t1`.`eventID`, `t1`.`asso`, `t1`.`eventName`, `t1`.`eventDate`, `t1`.`eventFlyer`, `t1`.`eventTicketMax`, `t1`.`location`, `t2`.`placeLeft` FROM `events` as `t1`, (SELECT events.eventTicketMax - (SELECT COUNT(*) FROM `tickets`) as `placeLeft`, `eventID` FROM `events`) as `t2` WHERE `eventDate` >= CURDATE() and `t2`.`eventID` = `t1`.`eventID` order by `eventDate`;');
 
 		$sth->execute();
@@ -31,14 +55,14 @@ class API {
 		$matrix;
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
-			$matrix[$i]["id"] = $row["eventID"];
-			$matrix[$i]["name"] = $row["eventName"];
-			$matrix[$i]["asso"] = $row["asso"];
-			$matrix[$i]["date"] = $row["eventDate"];
-			$matrix[$i]["location"] = $row["location"];
-			$matrix[$i]["eventFlyer"] = $row["eventFlyer"];
-			$matrix[$i]["maxTickets"] = $row["eventTicketMax"];
-			$matrix[$i]["ticketsLeft"] = $row["placeLeft"];
+			$matrix["id"][$i] = $row["eventID"];
+			$matrix["name"][$i] = $row["eventName"];
+			$matrix["asso"][$i] = $row["asso"];
+			$matrix["date"][$i] = $row["eventDate"];
+			$matrix["location"][$i] = $row["location"];
+			$matrix["eventFlyer"][$i] = $row["eventFlyer"];
+			$matrix["maxTickets"][$i] = $row["eventTicketMax"];
+			$matrix["ticketsLeft"][$i] = $row["placeLeft"];
 			$i ++;
 		}
 
@@ -107,6 +131,46 @@ class API {
 		else
 			return False;
 	}
+
+	public function getAllAssos(){
+		$sth = $this->connexion->prepare('SELECT `name` FROM `assos`;');
+		$sth->execute();
+
+		$i = 0;
+		$array = array();
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+			$array[$i] = $row["name"];
+			$i ++;
+		}
+
+		return $array;
+	}
+
+	public function getEventsCount(){
+		$sth = $this->connexion->prepare('SELECT count(*) FROM `events`;');
+		$sth->execute();
+		return $sth->fetch()[0];
+	}
+
+	public function getAssosCount(){
+		$sth = $this->connexion->prepare('SELECT count(*) FROM `assos`;');
+		$sth->execute();
+		return $sth->fetch()[0];
+	}
+
+	public function getTicketsSoldCount(){
+		$sth = $this->connexion->prepare('SELECT count(*) FROM `tickets`;');
+		$sth->execute();
+		return $sth->fetch()[0];
+	}
+
+	public function getPeopleCount(){
+		$sth = $this->connexion->prepare('SELECT count(*) FROM `people`;');
+		$sth->execute();
+		return $sth->fetch()[0];
+	}
+
 }
 
 ?>

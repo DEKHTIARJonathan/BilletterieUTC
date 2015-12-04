@@ -11,7 +11,6 @@
 	$role = $api->getPlatformRole($_SESSION['login']);
 
   if ($role == "admin"){
-    echo "admin";
     $_SESSION['admin'] = True;
     $_SESSION['assos'] = "";
     $_SESSION['roles'] = "";
@@ -19,7 +18,7 @@
     $_SESSION['admin'] = False;
 
     $matrix = $api->getAssosRoles($_SESSION['login']);
-    
+
     if (sizeof($matrix['association']) > 0){
   		for ($i = 0; $i < sizeof($matrix['association']); $i ++){
   			$_SESSION['assos'][$i] = $matrix['association'][$i];

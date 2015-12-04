@@ -10,7 +10,7 @@
 
 	$eventID = isset($_GET['eventID']) ? $_GET['eventID'] : '';
 
-	$matrix = $api->getAllEvents();
+	$matrix = $api->getAllEventsAlived();
 
 ?>
 
@@ -76,15 +76,16 @@
 
 							$i = 0;
 
-							foreach ($matrix as &$row) {
-								$id = $row["id"];
-								$name = $row["name"];
-								$asso = $row["asso"];
-								$date = $row["date"];
-								$location = $row["location"];
-								$eventFlyer = $row["eventFlyer"];
-								$maxTickets = $row["maxTickets"];
-								$ticketsLeft = $row["ticketsLeft"];
+							for ($i = 0; $i < sizeof($matrix["id"]); $i++) {
+								echo $i;
+								$id = $matrix["id"][$i];
+								$name = $matrix["name"][$i];
+								$asso = $matrix["asso"][$i];
+								$date = $matrix["date"][$i];
+								$location = $matrix["location"][$i];
+								$eventFlyer = $matrix["eventFlyer"][$i];
+								$maxTickets = $matrix["maxTickets"][$i];
+								$ticketsLeft = $matrix["ticketsLeft"][$i];
 
 								if ($i % 3 == 0)
 									echo '<tr class="success">';
@@ -92,7 +93,6 @@
 									echo '<tr class="warning">';
 								else
 									echo '<tr class="info">';
-								$i += 1;
 
 								echo'<td><div class="span3"><img src="../'.$eventFlyer.'" alt="affiche-evenement style="width=200px;height=200px"></div></td>
 									 <td><div class="span6"><br><h3><center>'.$name.' @ '.$location.'<br>- '.$date.' -<br> <br> nombre de place restantes : '.$ticketsLeft.' </center></h3></div></td>
