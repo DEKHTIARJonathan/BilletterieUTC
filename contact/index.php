@@ -3,7 +3,6 @@
 	header("Content-Type: text/html; charset=UTF-8");
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
   require_once $root.'/config.inc.php';
-	require_once $root.'/inc/checksession.php';
 ?>
 
 <!DOCTYPE html>

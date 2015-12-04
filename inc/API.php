@@ -39,7 +39,7 @@ class API {
 			$matrix[$i]["eventFlyer"] = $row["eventFlyer"];
 			$matrix[$i]["maxTickets"] = $row["eventTicketMax"];
 			$matrix[$i]["ticketsLeft"] = $row["placeLeft"];
-			$i += 1;
+			$i ++;
 		}
 
 		return $matrix;
@@ -53,7 +53,6 @@ class API {
 
 		return $sth->fetch();
 	}
-
 
 	public function getAllTarifsByEvent($eventID){
 		$sth = $this->connexion->prepare('SELECT * FROM `tarifs` WHERE `eventID` = :eventID');
@@ -71,12 +70,43 @@ class API {
 			$matrix[$i]["tarifName"] = $row["tarifName"];
 			$matrix[$i]["price"] = $row["price"];
 			$matrix[$i]["maxByUser"] = $row["maxByUser"];
-			$i += 1;
+			$i ++;
 		}
-
 		return $matrix;
 	}
 
+	public function getAssosRoles($login){
+
+		$sth = $this->connexion->prepare('SELECT `association`, `role` FROM `asso_assoc` WHERE (`login` = :login)');
+		$sth->bindParam(':login', $login);
+
+		$sth->execute();
+
+		$i = 0;
+		$matrix = array();
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+			$matrix["association"][$i] = $row["association"];
+			$matrix["role"][$i] = $row["role"];
+			$i ++;;
+		}
+		return $matrix;
+
+	}
+
+	public function getPlatformRole($login){
+		$sth = $this->connexion->prepare('SELECT count(*) as `numrows`, `role` FROM `people` WHERE `login` = :login');
+
+		$sth->bindParam(':login', $login);
+		$sth->execute();
+
+		$rslt = $sth->fetch();
+
+		if ($rslt["numrows"] > 0)
+			return $rslt["role"];
+		else
+			return False;
+	}
 }
 
 ?>
