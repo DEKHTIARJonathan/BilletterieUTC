@@ -39,6 +39,7 @@
         $web .= "</html>";
 
         echo $web;
+        echo $mysqli->error;
 
     }
 

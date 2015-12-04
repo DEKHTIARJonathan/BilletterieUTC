@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 03 Décembre 2015 à 00:27
+-- Généré le :  Ven 04 Décembre 2015 à 10:28
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `assos`
 --
--- Création :  Mer 02 Décembre 2015 à 23:24
---
 
 DROP TABLE IF EXISTS `assos`;
 CREATE TABLE IF NOT EXISTS `assos` (
@@ -39,14 +37,13 @@ CREATE TABLE IF NOT EXISTS `assos` (
 --
 
 INSERT INTO `assos` (`name`, `email`, `payutcKey`) VALUES
-('billetterie', 'billetterie@assos.utc.fr', 'bc05063b0a126b900fa25c8de404391742f87e92');
+('billetterie', 'billetterie@assos.utc.fr', 'bc05063b0a126b900fa25c8de404391742f87e92'),
+('etuville', 'etuville@assos.utc.fr', '87f520dbd23b6a642db9462d60096573c10d97c3');
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `asso_assoc`
---
--- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `asso_assoc`;
@@ -58,12 +55,17 @@ CREATE TABLE IF NOT EXISTS `asso_assoc` (
   KEY `fk_asso_assoc` (`association`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `asso_assoc`
+--
+
+INSERT INTO `asso_assoc` (`login`, `association`, `role`) VALUES
+('jdekhtia', 'billetterie', 'President');
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `events`
---
--- Création :  Mer 02 Décembre 2015 à 23:24
 --
 
 DROP TABLE IF EXISTS `events`;
@@ -96,13 +98,11 @@ INSERT INTO `events` (`eventID`, `asso`, `eventName`, `eventDate`, `eventFlyer`,
 --
 -- Structure de la table `people`
 --
--- Création :  Mer 02 Décembre 2015 à 23:24
---
 
 DROP TABLE IF EXISTS `people`;
 CREATE TABLE IF NOT EXISTS `people` (
   `login` varchar(8) NOT NULL,
-  `role` enum('Administrateur','Utilisateur') NOT NULL,
+  `role` enum('admin','user') NOT NULL,
   PRIMARY KEY (`login`),
   KEY `role` (`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -112,14 +112,12 @@ CREATE TABLE IF NOT EXISTS `people` (
 --
 
 INSERT INTO `people` (`login`, `role`) VALUES
-('jdekhtia', 'Administrateur');
+('jdekhtia', 'user');
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `tarifs`
---
--- Création :  Mer 02 Décembre 2015 à 23:26
 --
 
 DROP TABLE IF EXISTS `tarifs`;
@@ -155,8 +153,6 @@ INSERT INTO `tarifs` (`tarifID`, `eventID`, `tarifName`, `price`, `maxSold`, `ma
 --
 -- Structure de la table `tariftypes`
 --
--- Création :  Mer 02 Décembre 2015 à 23:26
---
 
 DROP TABLE IF EXISTS `tariftypes`;
 CREATE TABLE IF NOT EXISTS `tariftypes` (
@@ -179,8 +175,6 @@ INSERT INTO `tariftypes` (`tarifName`, `cotisant`, `utc`) VALUES
 
 --
 -- Structure de la table `tickets`
---
--- Création :  Mer 02 Décembre 2015 à 23:26
 --
 
 DROP TABLE IF EXISTS `tickets`;
