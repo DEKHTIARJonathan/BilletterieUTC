@@ -75,9 +75,10 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-5 frame-large">
+
 				<?php
-					echo '<img src="../'.$flyer.'" alt="affiche-evenement" style="max-height:100%; max-width:100%;">';
+					echo '<span class="helper"></span><img class="centered-img-large" src="../'.$flyer.'" alt="affiche-evenement">';
 				?>
 
 				</div>

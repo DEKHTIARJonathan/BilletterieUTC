@@ -77,7 +77,6 @@
 							$i = 0;
 
 							for ($i = 0; $i < sizeof($matrix["id"]); $i++) {
-								echo $i;
 								$id = $matrix["id"][$i];
 								$name = $matrix["name"][$i];
 								$asso = $matrix["asso"][$i];
@@ -94,13 +93,11 @@
 								else
 									echo '<tr class="info">';
 
-								echo'<td><div class="span3"><img src="../'.$eventFlyer.'" alt="affiche-evenement style="width=200px;height=200px"></div></td>
+								echo'<td><div class="frame"><span class="helper"></span><img class="centered-img" src="../'.$eventFlyer.'" alt="affiche-evenement"></div></td>
 									 <td><div class="span6"><br><h3><center>'.$name.' @ '.$location.'<br>- '.$date.' -<br> <br> nombre de place restantes : '.$ticketsLeft.' </center></h3></div></td>
 									 <td><div class="span3"><br><br><center><br><br><a href="billetterie.php?eventID='.$id.'" class="btn btn-primary" role="button">Acheter des places</a></center></div></td>
 									 </tr>';
-
 							}
-
 						?>
 						</tbody>
 					  </table>

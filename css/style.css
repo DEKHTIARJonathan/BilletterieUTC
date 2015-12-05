@@ -53,3 +53,32 @@ p {
 .login-link {
     color: black;
 }
+
+
+.frame {
+  height:200px;
+  white-space: nowrap;
+  text-align: center; margin: 1em 0;
+}
+
+.frame-large {
+  width:400px;
+  white-space: nowrap;
+  text-align: center; margin: 1em 0;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.centered-img {
+  max-width: 200px;
+  vertical-align: middle;
+}
+
+.centered-img-large {
+  max-width: 380px;
+  vertical-align: middle;
+}
