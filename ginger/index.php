@@ -7,9 +7,7 @@
   require_once $root.'/ginger/KoalaClient.php';
   require_once $root.'/ginger/GingerClient.php';
 
-	$debug = true;
-
-	$ginger = new \Ginger\Client\GingerClient ($_CONFIG['ginger']["key"], $_CONFIG['ginger']["service"], $debug);
+	$ginger = new \Ginger\Client\GingerClient ($_CONFIG['ginger']["key"], $_CONFIG['ginger']["service"], $_CONFIG['debug']);
 
   try{
 	  $user = $ginger->getUser("mralaivo");
