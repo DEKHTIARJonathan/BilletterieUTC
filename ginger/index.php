@@ -10,7 +10,7 @@
 	$ginger = new \Ginger\Client\GingerClient ($_CONFIG['ginger']["key"], $_CONFIG['ginger']["service"], $_CONFIG['debug']);
 
   try{
-	  $user = $ginger->getUser("mralaivo");
+	  $user = $ginger->getUser("jdekhtia");
 
 	  echo var_dump($user);
 	  echo $user->login;echo"<br>";

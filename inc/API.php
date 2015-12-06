@@ -172,14 +172,24 @@ class API {
 	}
 
 	public function checkRights($login, $asso){
-		$sth = $this->connexion->prepare('SELECT CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `hasRight` FROM `asso_assoc` as `t1`, `people` as `t2` WHERE `association` = :asso and (`t1`.`login` = :login1 or (`t2`.`role` = "admin" and `t2`.`login` = :login2))');
+		$sth = $this->connexion->prepare('Select `t1`.`isAdmin`, `t2`.`hasRight`, `t3`.`name` From
+		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `people` where `login` = :login and `role` = "admin") as `t1`,
+		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `hasRight` From `asso_assoc` where `login` = "jdekhtia" and `association` = :asso) as `t2`,
+		`assos` as `t3`
+		WHERE `t3`.`name` = :asso;
+		');
 
-		$sth->bindParam(':login1', $login);
-		$sth->bindParam(':login2', $login);
+		$sth->bindParam(':login', $login);
 		$sth->bindParam(':asso', $asso);
 		$sth->execute();
 
-		return filter_var($sth->fetch()["hasRight"], FILTER_VALIDATE_BOOLEAN);
+		$output = $sth->fetch();
+
+		$rsltAdmin = filter_var($output["isAdmin"], FILTER_VALIDATE_BOOLEAN);
+		$rsltAssoRight = filter_var($output["hasRight"], FILTER_VALIDATE_BOOLEAN);
+
+		return $rsltAdmin || $rsltAssoRight;
+
 	}
 }
 

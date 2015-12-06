@@ -51,6 +51,12 @@
 			<br><br>
 		</div>
 
+		<script>
+			$("#assoSelect").on('change', function() {
+				window.location = "http://"+window.location.hostname + window.location.pathname + "?asso=" + this.value ; // or $(this).val()
+			});
+		</script>
+
 		<ul class="main-menu" id="main-menu" style="">
 			<li class="active has-sub root-level">
 				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-home"></i><span class="title">Accueil</span></a>
