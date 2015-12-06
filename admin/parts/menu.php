@@ -51,59 +51,61 @@
 			</div>
 		</header>
 
-
-
 		<script>
-			$("#assoSelect").on('change', function() {
-				window.location = "http://"+window.location.hostname + window.location.pathname + "?asso=" + this.value ; // or $(this).val()
-			});
+
 		</script>
 
 		<ul class="main-menu" id="main-menu" style="">
 
-			<li class="active has-sub root-level">
+			<li class="root-level" id="home">
 				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-home"></i><span class="title">Accueil</span></a>
 			</li>
 
 			<?php
 				if($_SESSION['admin']){
-					echo '<li class="opened has-sub root-level">
+					echo '<li class="has-sub root-level" id="adminBilletterie">
 						<a ><i class="entypo-gauge"></i><span class="title">Administration Billetterie</span></a>
-						<ul class="visible">
-							<li>
-								<a href="'.$pre_url.'index.php"><span class="title">Création Association</span></a>
+						<ul id="adminBilletterieUL">
+							<li id="createAsso">
+								<a href="'.$pre_url.'createAsso.php"><span class="title">Création Association</span></a>
 							</li>
-							<li>
-								<a href="'.$pre_url.'index.php"><span class="title">Gestion des droits admin</span></a>
+							<li id="platformRights">
+								<a href="'.$pre_url.'platformRights.php"><span class="title">Gestion des droits admin</span></a>
 							</li>
 						</ul>
 					</li>';
 				}
 			?>
 
-			<li class="has-sub root-level">
+			<li class="has-sub root-level" id="adminAsso">
 				<a ><i class="entypo-gauge"></i><span class="title">Mon association</span></a>
-				<ul>
-					<li>
-						<a href="<?php echo $pre_url; ?>index.php"><span class="title">Paramètres Associations</span></a>
+				<ul id="adminAssoUL">
+					<li id="myAsso">
+						<a href="<?php echo $pre_url; ?>myAsso.php"><span class="title">Paramètres Associations</span></a>
 					</li>
-					<li>
-						<a href="<?php echo $pre_url; ?>index.php"><span class="title">Gérer les membres</span></a>
+					<li id="assoMembers">
+						<a href="<?php echo $pre_url; ?>assoMembers.php"><span class="title">Gérer les membres</span></a>
 					</li>
 				</ul>
 			</li>
-			<li class="root-level">
-				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-calendar"></i><span class="title">Créer un événement</span></a>
+			<li class="root-level" id="createEvent">
+				<a href="<?php echo $pre_url; ?>createEvent.php"><i class="entypo-calendar"></i><span class="title">Créer un événement</span></a>
 			</li>
-			<li class="root-level">
-				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-users"></i><span class="title">Gérer mes événements</span></a>
+			<li class="root-level" id="myEvents">
+				<a href="<?php echo $pre_url; ?>myEvents.php"><i class="entypo-users"></i><span class="title">Gérer mes événements</span></a>
 			</li>
 			<li class="root-level">
 				<a href="<?php echo $_CONFIG["website"]['home']; ?>"><i class="entypo-logout"></i><span class="title">Retour sur la Billetterie</span></a>
 			</li>
 			<li class="root-level">
-				<a href="<?php echo $pre_url; ?>../inc/disconnect.php"><i class="entypo-logout"></i><span class="title">Déconnexion</span></a>
+				<a href="<?php echo $_CONFIG["website"]['home']; ?>inc/disconnect.php"><i class="entypo-logout"></i><span class="title">Déconnexion</span></a>
 			</li>
 		</ul>
 	</div>
 </div>
+
+
+<script>
+
+
+</script>

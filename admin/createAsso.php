@@ -87,11 +87,7 @@
 	<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
 	<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
 	<script id="script-resource-19" src="assets/js/script.js"></script>
+	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 
-	<script>
-		<?php
-			echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);';
-		?>
-	</script>
 </body>
 </html>
