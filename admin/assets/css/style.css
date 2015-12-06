@@ -5,3 +5,9 @@
 .page-body .selectboxit {
     display: inline;
 }
+
+.assoSelect {
+	margin-top:45px;
+	margin-left : -10px;
+	margin-bottom:-20px;
+}

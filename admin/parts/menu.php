@@ -5,7 +5,7 @@
 	require_once $root.'/config.inc.php';
 	require_once $root.'/inc/API.php';
 
-	if (substr_count($_SERVER["REQUEST_URI"], '/') == 1)
+	if (substr_count($_SERVER["REQUEST_URI"], '/') == 2)
 		$pre_url = "./";
 	else
 		$pre_url = "../";
@@ -17,39 +17,41 @@
 		<header class="logo-env">
 			<!-- logo -->
 			<div class="logo">
-				<a href="index.html"><img alt="" src="assets/images/logo.png" width="120"></a>
+				<a href="<?php echo $_CONFIG["website"]['home']; ?>admin/"><img alt="" src="assets/images/logo.png" width="120"></a>
 			</div><!-- logo collapse icon -->
 			<div class="sidebar-collapse">
 				<a class="sidebar-collapse-icon" href="#">
-				<!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+
 				<i class="entypo-menu"></i></a>
 			</div>
-			<!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+
 			<div class="sidebar-mobile-menu visible-xs">
 				<a class="with-animation" href="#">
-				<!-- add class "with-animation" to support animation --> <i class="entypo-menu"></i></a>
+				<i class="entypo-menu"></i></a>
+			</div>
+			<div class="logo assoSelect">
+				Mon Association :&nbsp;
+				<select class="selectboxit visible" style="width:138px;" id="assoSelect">
+					<optgroup label="Mes Associations">
+						<?php
+							if(!$_SESSION['admin']){
+								for ($i = 0; $i < sizeof($_SESSION['assos']); $i++){
+									echo '<option value="'.$_SESSION['assos'][$i].'">'.$_SESSION['assos'][$i].'</option>';
+								}
+							}
+							else{
+								$array = $api->getAllAssos();
+								for ($i = 0; $i < sizeof($array); $i++){
+									echo '<option value="'.$array[$i].'">'.$array[$i].'</option>';
+								}
+							}
+						?>
+				</select>
+				<br><br>
 			</div>
 		</header>
-		<div style="margin-left:25px;">
-			Mon Association :&nbsp;
-			<select class="selectboxit visible" style="width:138px;" id="assoSelect">
-				<optgroup label="Mes Associations">
-					<?php
-						if(!$_SESSION['admin']){
-							for ($i = 0; $i < sizeof($_SESSION['assos']); $i++){
-								echo '<option value="'.$_SESSION['assos'][$i].'">'.$_SESSION['assos'][$i].'</option>';
-							}
-						}
-						else{
-							$array = $api->getAllAssos();
-							for ($i = 0; $i < sizeof($array); $i++){
-								echo '<option value="'.$array[$i].'">'.$array[$i].'</option>';
-							}
-						}
-					?>
-			</select>
-			<br><br>
-		</div>
+
+
 
 		<script>
 			$("#assoSelect").on('change', function() {
@@ -58,6 +60,7 @@
 		</script>
 
 		<ul class="main-menu" id="main-menu" style="">
+
 			<li class="active has-sub root-level">
 				<a href="<?php echo $pre_url; ?>index.php"><i class="entypo-home"></i><span class="title">Accueil</span></a>
 			</li>
@@ -68,10 +71,10 @@
 						<a ><i class="entypo-gauge"></i><span class="title">Administration Billetterie</span></a>
 						<ul class="visible">
 							<li>
-								<a href="<?php echo $pre_url; ?>index.php"><span class="title">Création Association</span></a>
+								<a href="'.$pre_url.'index.php"><span class="title">Création Association</span></a>
 							</li>
 							<li>
-								<a href="<?php echo $pre_url; ?>index.php"><span class="title">Gestion des droits admin</span></a>
+								<a href="'.$pre_url.'index.php"><span class="title">Gestion des droits admin</span></a>
 							</li>
 						</ul>
 					</li>';
