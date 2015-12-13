@@ -127,23 +127,23 @@
 		<script id="script-resource-13" src="assets/js/raphael-min.js"></script>
 		<script id="script-resource-14" src="assets/js/morris.min.js"></script>
 		<script id="script-resource-15" src="assets/js/toastr.js"></script>
-		<script id="script-resource-16" src="assets/js/select2/select2.min.js"></script>
-		<script id="script-resource-17" src="assets/js/bootstrap-tagsinput.min.js"></script>
-		<script id="script-resource-18" src="assets/js/typeahead.min.js"></script>
-		<script id="script-resource-19" src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
-		<script id="script-resource-20" src="assets/js/bootstrap-datepicker.js"></script>
-		<script id="script-resource-21" src="assets/js/bootstrap-timepicker.min.js"></script>
-		<script id="script-resource-22" src="assets/js/bootstrap-colorpicker.min.js"></script>
-		<script id="script-resource-23" src="assets/js/moment.min.js"></script>
-		<script id="script-resource-24" src="assets/js/daterangepicker/daterangepicker.js"></script>
-		<script id="script-resource-25" src="assets/js/jquery.multi-select.js"></script>
-		<script id="script-resource-26" src="assets/js/icheck/icheck.min.js"></script>
-		<script id="script-resource-27" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
-		<script id="script-resource-28" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
-		<script id="script-resource-29" src="assets/js/neon-demo.js"></script>
+		<script id="script-resource-16" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
+		<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
+		<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
+		<script id="script-resource-19" src="assets/js/script.js"></script>
+		<script id="script-resource-20" src="assets/js/select2/select2.min.js"></script>
+		<script id="script-resource-21" src="assets/js/bootstrap-tagsinput.min.js"></script>
+		<script id="script-resource-22" src="assets/js/typeahead.min.js"></script>
+		<!--	<script id="script-resource-23" src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>	-->
+		<script id="script-resource-24" src="assets/js/bootstrap-datepicker.js"></script>
+		<script id="script-resource-25" src="assets/js/bootstrap-timepicker.min.js"></script>
+		<script id="script-resource-26" src="assets/js/bootstrap-colorpicker.min.js"></script>
+		<script id="script-resource-27" src="assets/js/moment.min.js"></script>
+		<script id="script-resource-28" src="assets/js/daterangepicker/daterangepicker.js"></script>
+		<script id="script-resource-29" src="assets/js/jquery.multi-select.js"></script>
+		<script id="script-resource-30" src="assets/js/icheck/icheck.min.js"></script>
 		<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
 		<script id="script-resource-32" src="assets/js/fileinput.js"></script>
-		<script id="script-resource-30" src="assets/js/script.js"></script>
 
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 
