@@ -39,29 +39,26 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
-	<meta content="Neon Admin Panel" name="description">
-	<meta content="Laborator.co" name="author">
+
 	<link href="assets/images/favicon.ico" rel="icon">
 	<title><?php echo $_CONFIG["website"]["title"]; ?></title>
-	<link href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"
-	id="style-resource-1" rel="stylesheet">
-	<link href="assets/css/font-icons/entypo/css/entypo.css" id="style-resource-2"
-	rel="stylesheet">
-	<link href=
-	"../fonts.googleapis.com/cssdcaf.css?family=Noto+Sans:400,700,400italic" id=
-	"style-resource-3" rel="stylesheet">
+
+	<link href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css"	id="style-resource-1" rel="stylesheet">
+	<link href="assets/css/font-icons/entypo/css/entypo.css" id="style-resource-2" rel="stylesheet">
+	<link href="fonts.googleapis.com/cssdcaf.css?family=Noto+Sans:400,700,400italic" id="style-resource-3" rel="stylesheet">
 	<link href="assets/css/bootstrap.css" id="style-resource-4" rel="stylesheet">
 	<link href="assets/css/neon-core.css" id="style-resource-5" rel="stylesheet">
 	<link href="assets/css/neon-theme.css" id="style-resource-6" rel="stylesheet">
 	<link href="assets/css/neon-forms.css" id="style-resource-7" rel="stylesheet">
-	<link href="assets/css/style.css" id="style-resource-7" rel="stylesheet">
-	<script src="assets/js/jquery-1.11.3.min.js">
-	</script>
+	<link href="assets/css/style.css" id="style-resource-8" rel="stylesheet">
+
+	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	<!--[if lt IE 9]>
-	<script src="../scripts/ie8-responsive-file-warning.js"></script>
+	<script src="<?php echo $root.'/scripts/ie8-responsive-file-warning.js'; ?>"></script>
 	<![endif]-->
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -69,6 +66,7 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
+
 <body class="page-body page-fade">
 	<div class="page-container">
 		<?php
