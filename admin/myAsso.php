@@ -10,11 +10,25 @@
 
 	$asso = isset($_GET['asso']) ? $_GET['asso'] : '';
 	if ($asso != ''){
-		if (!$api->checkRights($_SESSION['login'], $asso))
-			$asso = $_SESSION['assos'][0];
+		if (!$api->checkRights($_SESSION['login'], $asso)){
+			if (isset($_SESSION['currentAsso']))
+			 $asso = $_SESSION['currentAsso'];
+			else{
+			 $asso = $_SESSION['assos'][0];
+			 $_SESSION['currentAsso'] = $asso;
+			}
+		}
+		else
+			$_SESSION['currentAsso'] = $asso;
 	}
-	else
-		$asso = $_SESSION['assos'][0];
+	else{
+		if (isset($_SESSION['currentAsso']))
+		 $asso = $_SESSION['currentAsso'];
+		else{
+		 $asso = $_SESSION['assos'][0];
+		 $_SESSION['currentAsso'] = $asso;
+		}
+	}
 
 ?>
 
@@ -127,7 +141,7 @@
 		<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
 		<script id="script-resource-32" src="assets/js/fileinput.js"></script>
 		<script id="script-resource-30" src="assets/js/script.js"></script>
-		
+
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 
 </body>

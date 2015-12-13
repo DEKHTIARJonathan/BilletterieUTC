@@ -6,15 +6,33 @@
 	require_once $root.'/inc/API.php';
 	require_once $root.'/inc/checkadmin.php';
 
+	// Checking the user is administrator of the platform.
+	if(!$_SESSION['admin'])
+		header('Location: '.$_CONFIG["website"]['home'].'admin/');
+
 	$api = new API();
 
 	$asso = isset($_GET['asso']) ? $_GET['asso'] : '';
 	if ($asso != ''){
-		if (!$api->checkRights($_SESSION['login'], $asso))
-			$asso = $_SESSION['assos'][0];
+		if (!$api->checkRights($_SESSION['login'], $asso)){
+			if (isset($_SESSION['currentAsso']))
+			 $asso = $_SESSION['currentAsso'];
+			else{
+			 $asso = $_SESSION['assos'][0];
+			 $_SESSION['currentAsso'] = $asso;
+			}
+		}
+		else
+			$_SESSION['currentAsso'] = $asso;
 	}
-	else
-		$asso = $_SESSION['assos'][0];
+	else{
+		if (isset($_SESSION['currentAsso']))
+		 $asso = $_SESSION['currentAsso'];
+		else{
+		 $asso = $_SESSION['assos'][0];
+		 $_SESSION['currentAsso'] = $asso;
+		}
+	}
 
 ?>
 
@@ -154,7 +172,7 @@
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 	<script>
 		$('#assoName').on('input', function() {
-	    $("#assoEmail").val(this.value + "@assos.utc.fr");
+	    $("#assoEmail").val(this.value.toLowerCase() + "@assos.utc.fr");
 		});
 	</script>
 
