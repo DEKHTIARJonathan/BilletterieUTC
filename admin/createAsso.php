@@ -60,6 +60,23 @@
 		<div class="main-content">
 
 			<div class="row">
+				<form>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Date Picker (popup)</label>
+						<div class="col-sm-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker" data-format="D, dd MM yyyy">
+								<div class="input-group-addon">
+									<a href="#">
+										<i class="entypo-calendar"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+
+
 
 			</div>
 
@@ -68,8 +85,18 @@
 	<link href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css" id="style-resource-1" rel="stylesheet">
 	<link href="assets/js/rickshaw/rickshaw.min.css" id="style-resource-2" rel="stylesheet">
 
+	<link href="assets/js/select2/select2-bootstrap.css" id="style-resource-3" rel="stylesheet">
+	<link href="assets/js/select2/select2.css" id="style-resource-4" rel="stylesheet">
+	<link href="assets/js/selectboxit/jquery.selectBoxIt.css" id="style-resource-5" rel="stylesheet">
+	<link href="assets/js/daterangepicker/daterangepicker-bs3.css" id="style-resource-6" rel="stylesheet">
+	<link href="assets/js/icheck/skins/minimal/_all.css" id="style-resource-7" rel="stylesheet">
+	<link href="assets/js/icheck/skins/square/_all.css" id="style-resource-8" rel="stylesheet">
+	<link href="assets/js/icheck/skins/flat/_all.css" id="style-resource-9" rel="stylesheet">
+	<link href="assets/js/icheck/skins/futurico/futurico.css" id="style-resource-10" rel="stylesheet">
+	<link href="assets/js/icheck/skins/polaris/polaris.css" id="style-resource-11" rel="stylesheet">
+
 	<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
-	<script id="script-resource-2" src=	"assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script id="script-resource-2" src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
 	<script id="script-resource-3" src="assets/js/bootstrap.js"></script>
 	<script id="script-resource-4" src="assets/js/joinable.js"></script>
 	<script id="script-resource-5" src="assets/js/resizeable.js"></script>
@@ -83,10 +110,21 @@
 	<script id="script-resource-13" src="assets/js/raphael-min.js"></script>
 	<script id="script-resource-14" src="assets/js/morris.min.js"></script>
 	<script id="script-resource-15" src="assets/js/toastr.js"></script>
-	<script id="script-resource-16" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
-	<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
-	<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
-	<script id="script-resource-19" src="assets/js/script.js"></script>
+  <script id="script-resource-16" src="assets/js/select2/select2.min.js"></script>
+  <script id="script-resource-17" src="assets/js/bootstrap-tagsinput.min.js"></script>
+  <script id="script-resource-18" src="assets/js/typeahead.min.js"></script>
+  <script id="script-resource-19" src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+  <script id="script-resource-20" src="assets/js/bootstrap-datepicker.js"></script>
+	<script id="script-resource-21" src="assets/js/bootstrap-timepicker.min.js"></script>
+  <script id="script-resource-22" src="assets/js/bootstrap-colorpicker.min.js"></script>
+	<script id="script-resource-23" src="assets/js/moment.min.js"></script>
+	<script id="script-resource-24" src="assets/js/daterangepicker/daterangepicker.js"></script>
+  <script id="script-resource-25" src="assets/js/jquery.multi-select.js"></script>
+	<script id="script-resource-26" src="assets/js/icheck/icheck.min.js"></script>
+	<script id="script-resource-27" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
+	<script id="script-resource-28" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
+	<script id="script-resource-29" src="assets/js/neon-demo.js"></script>
+	<script id="script-resource-30" src="assets/js/script.js"></script>
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 
 </body>
