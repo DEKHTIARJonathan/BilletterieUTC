@@ -191,6 +191,18 @@ class API {
 		return $rsltAdmin || $rsltAssoRight;
 
 	}
+
+	public function createAsso($name, $email, $payutcKey){
+		$sth = $this->connexion->prepare('INSERT INTO `assos` (`name`, `email`, `payutcKey`) VALUES (:name, :email, :payutckey);');
+
+		$sth->bindParam(':name', $name);
+		$sth->bindParam(':email', $email);
+		$sth->bindParam(':payutckey', $payutcKey);
+
+		return $sth->execute();
+	}
+
+
 }
 
 
