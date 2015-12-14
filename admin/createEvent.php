@@ -78,16 +78,16 @@
 				<li class="active"><strong>Création d'un événement</strong></li>
 			</ol>
 
-			<h2>Création d'une Association</h2><br>
+			<h2>Création d'un événement</h2><br>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
-							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createEvent.php" ?>">
+							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createEvent.php" ?>" enctype="multipart/form-data">
 								<div class="form-group">
-									<label class="col-sm-3 control-label" for="assoName">Nom de l'événement :</label>
+									<label class="col-sm-3 control-label" for="eventName">Nom de l'événement :</label>
 									<div class="col-sm-5">
-										<input class="form-control" id="assoName" name="assoName" placeholder="Nom de l'événement"	type="text">
+										<input class="form-control" id="eventName" name="eventName" placeholder="Nom de l'événement"	type="text">
 									</div>
 								</div>
 								<div class="form-group">
@@ -106,16 +106,24 @@
 								<div class="form-group">
 									<label class="col-sm-3 control-label" for="payutcKey">Lieu de l'événement :</label>
 									<div class="col-sm-5">
-										<input class="form-control" id="eventLocation" name="eventLocation" type="text" placeholder="Lieu de l'événement" type="text">
+										<input class="form-control" id="eventLocation" name="eventLocation" type="text" placeholder="Lieu de l'événement">
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="maxTickets">Nombre de place maximum :</label>
+									<div class="col-sm-5">
+										<input class="form-control" id="maxTickets" name="maxTickets" type="text" placeholder="Nombre maximal de tickets vendus." data-mask="99999" data-numeric="true" data-numeric-align="left">
+									</div>
+								</div>
+
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Flyer de l'événement <i>(max 1mb)</i>:</label>
 									<div class="col-sm-5">
 										<div class="fileinput fileinput-new" data-provides="fileinput">
 											<input name="..." type="hidden" value="">
-											<div class="fileinput-new thumbnail" data-trigger="fileinput" style=
-											"width: 200px; height: 150px;"><img alt="..." src="<?php echo $_CONFIG["website"]['home']."images/upload.png"?>"></div>
+											<div class="fileinput-new thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+												<img alt="..." src="<?php echo $_CONFIG["website"]['home']."images/upload.png"?>">
+											</div>
 											<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 10px;"></div>
 											<div>
 												<span class="btn btn-white btn-file">
@@ -123,7 +131,7 @@
 													<span class="fileinput-exists">Change</span>
 													<input accept="image/*" name="eventFlyer" id="eventFlyer" type="file">
 												</span>
-													<a class="btn btn-orange fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
+												<a class="btn btn-orange fileinput-exists" data-dismiss="fileinput" href="#">Remove</a>
 											</div>
 										</div>
 									</div>
@@ -141,18 +149,18 @@
 
 		</div>
 
-		<link href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css" id="style-resource-1" rel="stylesheet">
-		<link href="assets/js/rickshaw/rickshaw.min.css" id="style-resource-2" rel="stylesheet">
-		<link href="assets/js/select2/select2-bootstrap.css" id="style-resource-3" rel="stylesheet">
-		<link href="assets/js/select2/select2.css" id="style-resource-4" rel="stylesheet">
-		<link href="assets/js/selectboxit/jquery.selectBoxIt.css" id="style-resource-5" rel="stylesheet">
-		<link href="assets/js/daterangepicker/daterangepicker-bs3.css" id="style-resource-6" rel="stylesheet">
-		<link href="assets/js/icheck/skins/minimal/_all.css" id="style-resource-7" rel="stylesheet">
-		<link href="assets/js/icheck/skins/square/_all.css" id="style-resource-8" rel="stylesheet">
-		<link href="assets/js/icheck/skins/flat/_all.css" id="style-resource-9" rel="stylesheet">
-		<link href="assets/js/icheck/skins/futurico/futurico.css" id="style-resource-10" rel="stylesheet">
-		<link href="assets/js/icheck/skins/polaris/polaris.css" id="style-resource-11" rel="stylesheet">
-		<link href="assets/js/dropzone/dropzone.css" id="style-resource-12" rel="stylesheet">
+		<link id="style-resource-1" rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
+		<link id="style-resource-2" rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+		<link id="style-resource-3" rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+		<link id="style-resource-4" rel="stylesheet" href="assets/js/select2/select2.css">
+		<link id="style-resource-5" rel="stylesheet" href="assets/js/selectboxit/jquery.selectBoxIt.css">
+		<link id="style-resource-6" rel="stylesheet" href="assets/js/daterangepicker/daterangepicker-bs3.css">
+		<link id="style-resource-7" rel="stylesheet" href="assets/js/icheck/skins/minimal/_all.css">
+		<link id="style-resource-8" rel="stylesheet" href="assets/js/icheck/skins/square/_all.css">
+		<link id="style-resource-9" rel="stylesheet" href="assets/js/icheck/skins/flat/_all.css">
+		<link id="style-resource-10" rel="stylesheet" href="assets/js/icheck/skins/futurico/futurico.css">
+		<link id="style-resource-11" rel="stylesheet" href="assets/js/icheck/skins/polaris/polaris.css">
+		<link id="style-resource-12" rel="stylesheet" href="assets/js/dropzone/dropzone.css">
 
 		<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
 		<script id="script-resource-2" src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -186,6 +194,7 @@
 		<script id="script-resource-30" src="assets/js/icheck/icheck.min.js"></script>
 		<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
 		<script id="script-resource-32" src="assets/js/fileinput.js"></script>
+		<script id="script-resource-33" src="assets/js/jquery.inputmask.bundle.js"></script>
 
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 

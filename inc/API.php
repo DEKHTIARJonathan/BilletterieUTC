@@ -202,6 +202,18 @@ class API {
 		return $sth->execute();
 	}
 
+	public function createEvent($asso, $name, $eventDate, $flyer, $maxTickets, $location){
+		$sth = $this->connexion->prepare("INSERT INTO `events` (`eventID`, `asso`, `eventName`, `eventDate`, `eventFlyer`, `eventTicketMax`, `location`) VALUES (NULL, :asso, :name, DATE_FORMAT(STR_TO_DATE(:eventDate,'%d/%m/%Y'),'%Y-%m-%d'), :flyer, :maxTickets, :location)");
+
+		$sth->bindParam(':asso', $asso);
+		$sth->bindParam(':name', $name);
+		$sth->bindParam(':eventDate', $eventDate);
+		$sth->bindParam(':flyer', $flyer);
+		$sth->bindParam(':maxTickets', $maxTickets);
+		$sth->bindParam(':location', $location);
+
+		return $sth->execute();
+	}
 
 }
 

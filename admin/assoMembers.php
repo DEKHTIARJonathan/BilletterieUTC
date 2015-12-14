@@ -94,18 +94,18 @@
 
 		</div>
 
-		<link href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css" id="style-resource-1" rel="stylesheet">
-		<link href="assets/js/rickshaw/rickshaw.min.css" id="style-resource-2" rel="stylesheet">
-		<link href="assets/js/select2/select2-bootstrap.css" id="style-resource-3" rel="stylesheet">
-		<link href="assets/js/select2/select2.css" id="style-resource-4" rel="stylesheet">
-		<link href="assets/js/selectboxit/jquery.selectBoxIt.css" id="style-resource-5" rel="stylesheet">
-		<link href="assets/js/daterangepicker/daterangepicker-bs3.css" id="style-resource-6" rel="stylesheet">
-		<link href="assets/js/icheck/skins/minimal/_all.css" id="style-resource-7" rel="stylesheet">
-		<link href="assets/js/icheck/skins/square/_all.css" id="style-resource-8" rel="stylesheet">
-		<link href="assets/js/icheck/skins/flat/_all.css" id="style-resource-9" rel="stylesheet">
-		<link href="assets/js/icheck/skins/futurico/futurico.css" id="style-resource-10" rel="stylesheet">
-		<link href="assets/js/icheck/skins/polaris/polaris.css" id="style-resource-11" rel="stylesheet">
-		<link href="assets/js/dropzone/dropzone.css" id="style-resource-12" rel="stylesheet">
+		<link id="style-resource-1" rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
+		<link id="style-resource-2" rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+		<link id="style-resource-3" rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+		<link id="style-resource-4" rel="stylesheet" href="assets/js/select2/select2.css">
+		<link id="style-resource-5" rel="stylesheet" href="assets/js/selectboxit/jquery.selectBoxIt.css">
+		<link id="style-resource-6" rel="stylesheet" href="assets/js/daterangepicker/daterangepicker-bs3.css">
+		<link id="style-resource-7" rel="stylesheet" href="assets/js/icheck/skins/minimal/_all.css">
+		<link id="style-resource-8" rel="stylesheet" href="assets/js/icheck/skins/square/_all.css">
+		<link id="style-resource-9" rel="stylesheet" href="assets/js/icheck/skins/flat/_all.css">
+		<link id="style-resource-10" rel="stylesheet" href="assets/js/icheck/skins/futurico/futurico.css">
+		<link id="style-resource-11" rel="stylesheet" href="assets/js/icheck/skins/polaris/polaris.css">
+		<link id="style-resource-12" rel="stylesheet" href="assets/js/dropzone/dropzone.css">
 
 		<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
 		<script id="script-resource-2" src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -139,7 +139,8 @@
 		<script id="script-resource-30" src="assets/js/icheck/icheck.min.js"></script>
 		<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
 		<script id="script-resource-32" src="assets/js/fileinput.js"></script>
-		
+		<script id="script-resource-33" src="assets/js/jquery.inputmask.bundle.js"></script>
+
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 
 </body>
