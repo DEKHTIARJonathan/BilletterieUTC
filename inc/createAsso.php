@@ -10,7 +10,7 @@
 
   $assoName = isset($_POST['assoName']) ? ucfirst(mb_strtolower($_POST['assoName'], 'UTF-8')) : '';
 	$assoEmail = isset($_POST['assoName']) ? strtolower($_POST['assoName'], 'UTF-8')."@assos.utc.fr" : '';
-	$assoPayUtcKey = isset($_POST['payutcKey']) ? ucfirst(mb_strtolower($_POST['payutcKey'], 'UTF-8') : '';
+	$assoPayUtcKey = isset($_POST['payutcKey']) ? ucfirst(mb_strtolower($_POST['payutcKey'], 'UTF-8')) : '';
 
 	if($_SESSION['admin']){
 	  if ($assoName != '' && $assoEmail != '' && $assoPayUtcKey != ''){
