@@ -34,15 +34,15 @@ class GingerClient extends KoalaClient {
    * @return object Utilisateur
    */
   public function getCard($badge) {
-    return $this->apiCall("badge/$badge");
+    return $this->apiCall("badge/$badge", array(), "GET", $this->debug);
   }
 
   public function findPersonne($loginPart) {
-    return $this->apiCall("find/$loginPart");
+    return $this->apiCall("find/$loginPart", array(), "GET", $this->debug);
   }
 
   public function getCotisations($login) {
-    return $this->apiCall("$login/cotisations");
+    return $this->apiCall("$login/cotisations", array(), "GET", $this->debug);
   }
 
   public function addCotisation($login, $debut, $fin, $montant){
@@ -51,7 +51,7 @@ class GingerClient extends KoalaClient {
       "fin" => $fin,
       "montant" => $montant,
     );
-    return $this->apiCall("$login/cotisations", $params, "POST");
+    return $this->apiCall("$login/cotisations", $params, "POST", $this->debug);
   }
 
   /**
@@ -71,6 +71,6 @@ class GingerClient extends KoalaClient {
       "mail" => $mail,
       "is_adulte" => $is_adulte ? "true" : "false"
     );
-    return $this->apiCall("$login/edit", $params, "POST");
+    return $this->apiCall("$login/edit", $params, "POST", $this->debug);
   }
 }

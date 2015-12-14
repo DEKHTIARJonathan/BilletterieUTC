@@ -27,4 +27,6 @@
 	  echo "Fail";
   }
 
+	$array = $ginger->findPersonne("f");
+	echo var_dump($array);
 ?>
