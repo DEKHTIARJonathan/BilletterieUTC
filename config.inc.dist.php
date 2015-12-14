@@ -1,7 +1,5 @@
 <?php
 
-	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-
 	$_CONFIG['debug'] = TRUE;
 
 	// Paramètres de BDD
@@ -14,7 +12,7 @@
 	// Caractéristiques de la plateforme.
 	$_CONFIG["website"]["title"] = "Billetterie UTC";
 	$_CONFIG["website"]['home'] = "http://localhost/";
-	$_CONFIG["website"]['uploadPath'] = $root.'/images/upload/';
+	$_CONFIG["website"]['uploadPath'] = 'images/upload/';
 
 	// Chemin vers le serveur CAS (avec le / final)
 	$_CONFIG["cas"]["url"] = "https://cas.utc.fr/cas/";

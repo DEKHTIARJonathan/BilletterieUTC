@@ -11,13 +11,12 @@
 
 	$asso = $_SESSION['currentAsso'];
 
-  $eventName = isset($_POST['eventName']) ? ucfirst(mb_strtolower($_POST['eventName'], 'UTF-8')) : '';
-  $eventDate = isset($_POST['eventDate']) ? $_POST['eventDate'] : '';
+	$eventName = isset($_POST['eventName']) ? ucfirst(mb_strtolower($_POST['eventName'], 'UTF-8')) : '';
+	$eventDate = isset($_POST['eventDate']) ? $_POST['eventDate'] : '';
 	$eventLocation = isset($_POST['eventLocation']) ? ucfirst(mb_strtolower($_POST['eventLocation'], 'UTF-8')) : '';
 	$maxTickets = isset($_POST['maxTickets']) ? $_POST['maxTickets'] : '';
-	//$eventFlyer = isset($_POST['assoName']) ? strtolower($_POST['assoName'])."@assos.utc.fr" : '';
 
-  if ($eventName != '' && $eventDate != '' && $eventLocation != '' && $maxTickets != ''){
+	if ($eventName != '' && $eventDate != '' && $eventLocation != '' && $maxTickets != ''){
 
 				$target_file = $_CONFIG["website"]['uploadPath'].generateRandomString(20);
 
@@ -29,8 +28,8 @@
 
 				$uploadOk = 1;
 
-		    if(getimagesize($_FILES["eventFlyer"]["tmp_name"]) === false)
-	        $uploadOk = 0;
+				if(getimagesize($_FILES["eventFlyer"]["tmp_name"]) === false)
+					$uploadOk = 0;
 
 				elseif ($_FILES["eventFlyer"]["size"] > 1000000) // Larger than 1Mb
 					$uploadOk = 0;
@@ -39,7 +38,7 @@
 					$uploadOk = 0;
 
 				while (file_exists($root."/".$target_file)) {
-			    $target_file = $_CONFIG['uploadPath'].generateRandomString(20);
+					$target_file = $_CONFIG['uploadPath'].generateRandomString(20);
 					$target_file = $target_file.".".$ext;
 				}
 
@@ -49,16 +48,16 @@
 							if ($api->createEvent($asso, $eventName, $eventDate, $target_file, $maxTickets, $eventLocation))
 								header('Location: '.$_CONFIG["website"]['home'].'admin/');
 							else
-									header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php');
+									header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php?error=1');
 						}
 						catch(Exception $e){
-							header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php');
+							header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php?error=2');
 						}
 					else
-						header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php');
+						header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php?error=3');
 				else
-					header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php');
-  }
-  else
-		header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php');
+					header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php?error=4');
+	}
+	else
+		header('Location: '.$_CONFIG["website"]['home'].'admin/createEvent.php?error=5');
 ?>
