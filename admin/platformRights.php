@@ -90,26 +90,17 @@
 						<div class="panel-body">
 							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createAsso.php" ?>">
 								<div class="form-group">
-									<label class="col-sm-3 control-label" for="assoName">Nom de l'association :</label>
-									<div class="col-sm-5">
-										<input class="form-control" id="assoName" name="assoName" placeholder="Nom de votre association"	type="text">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="assoEmail">Adresse email associative :</label>
-									<div class="col-sm-5">
-										<input class="form-control" disabled id="assoEmail" type="text" placeholder="@assos.utc.fr">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="payutcKey">PayUTC API Key :</label>
-									<div class="col-sm-5">
-										<input class="form-control" id="payutcKey" name="payutcKey" type="text" placeholder="Votre API Key PAYUTC">
+									<label class="col-sm-4 control-label" for="assoName">Nom du nouvel administrateur :</label>
+									<div class="col-sm-8">
+										<input autocomplete="off" class="form-control" id="userName" name="userName" placeholder="Ecrivez le nom du nouvel administrateur" type="text">
+										<input id="userId" name="userId" type="hidden" value="">
+
+										<ul class="dropdown-menu" id="proposalUL"></ul>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-3 col-sm-5">
-										<button class="btn btn-blue" type="submit">Envoyer la création</button>
+										<button class="btn btn-blue" type="submit">Envoyer la demande</button>
 									</div>
 								</div>
 							</form>
@@ -201,9 +192,44 @@
 
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
 	<script>
-		$('#assoName').on('input', function() {
-	    $("#assoEmail").val(this.value.toLowerCase() + "@assos.utc.fr");
+		$('#userName').on('input', function() {
+			var requestSTR = this.value;
+			$("#proposalUL").removeClass("typeahead");
+			$("#proposalUL").empty();
+			if (requestSTR != ""){
+				$.ajax({
+				  url: "/inc/findPersonne.php",
+				  type: "get", //send it through get method
+				  data:{request:requestSTR},
+					dataType: "json",
+				  success: function(response) {
+				    if (response["status"] != "OK")
+							alert("KO");
+						else {
+							$.each(response["rslt"], function(i, item) {
+								$("#proposalUL").append('<li class="proposal"><a href="#">'+item.prenom + " " + item.nom + " ("+item.login+")"+'</a></li>');
+							});
+							$("#proposalUL").addClass("typeahead");
+							setCallBack();
+						}
+				  },
+				  error: function(xhr) {
+				    alert ("Error Fetching People from Ginger");
+				  }
+				});
+			}
 		});
+
+		function setCallBack(){
+			$(".proposal").on('click', function() {
+				var fullName = $(this).text();
+				$('#userName').val(fullName);
+				$('#userId').val(fullName.substr(fullName.indexOf("(") + 1).slice(0,-1));
+				$("#proposalUL").removeClass("typeahead");
+				$("#proposalUL").empty();
+			});
+		}
+
 	</script>
 
 </body>
