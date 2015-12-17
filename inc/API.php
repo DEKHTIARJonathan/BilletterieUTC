@@ -215,6 +215,21 @@ class API {
 		return $sth->execute();
 	}
 
+	public function getAllAdmins(){
+		$sth = $this->connexion->prepare('SELECT `login` FROM `people` WHERE `role` = "admin"');
+		$sth->execute();
+
+		$i = 0;
+		$array = array();
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+			$array[$i] = $row["login"];
+			$i ++;
+		}
+
+		return $array;
+	}
+
 }
 
 

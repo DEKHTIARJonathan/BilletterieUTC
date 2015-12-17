@@ -33,6 +33,26 @@
 		  }
 		}
 
+		public function getUser($login){
+			try{
+				$array = 	$this->ginger->getUser($login);
+				return $array;
+				/*
+				echo $user->login;echo"<br>";
+			  echo $user->nom;echo"<br>";
+			  echo $user->prenom;echo"<br>";
+			  echo $user->mail;echo"<br>";
+			  echo $user->type;echo"<br>";
+			  echo $user->is_adulte;echo"<br>";
+			  echo $user->is_cotisant;echo"<br>";
+			  echo $user->badge_uid;echo"<br>";
+			  echo $user->expiration_badge;echo"<br>";
+				*/
+		  }
+		  catch(Exception $e){
+			  echo False;
+		  }
+		}
 }
 
 ?>

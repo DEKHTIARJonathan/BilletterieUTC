@@ -4,6 +4,7 @@
 	$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 	require_once $root.'/config.inc.php';
 	require_once $root.'/inc/API.php';
+	require_once $root.'/inc/gingerAPI.php';
 	require_once $root.'/inc/checkadmin.php';
 
 	// Checking the user is administrator of the platform.
@@ -88,6 +89,7 @@
 				<div class="col-md-6">
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
+							<h4>Ajout d'un nouvel administrateur</h4><br>
 							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createAsso.php" ?>">
 								<div class="form-group">
 									<label class="col-sm-5 control-label" for="assoName">Nom du nouvel administrateur :</label>
@@ -110,31 +112,37 @@
 				<div class="col-md-6">
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
-							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createAsso.php" ?>">
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="assoName">Nom de l'association :</label>
-									<div class="col-sm-5">
-										<input class="form-control" id="assoName" name="assoName" placeholder="Nom de votre association"	type="text">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="assoEmail">Adresse email associative :</label>
-									<div class="col-sm-5">
-										<input class="form-control" disabled id="assoEmail" type="text" placeholder="@assos.utc.fr">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 control-label" for="payutcKey">PayUTC API Key :</label>
-									<div class="col-sm-5">
-										<input class="form-control" id="payutcKey" name="payutcKey" type="text" placeholder="Votre API Key PAYUTC">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-5">
-										<button class="btn btn-blue" type="submit">Envoyer la création</button>
-									</div>
-								</div>
-							</form>
+							<h4>Suppression des droits administrateurs</h4><br>
+			        <table class="table table-striped">
+			            <thead>
+			                <tr>
+			                    <th class="col-md-1">#</th>
+													<th class="col-md-3">Nom</th>
+													<th class="col-md-3">Prénom</th>
+			                    <th class="col-md-2">Login</th>
+			                    <th class="col-md-3">Action</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <?php
+												$admins = $api->getAllAdmins();
+												$i = 1;
+												$ginger = new gingerAPI();
+												foreach($admins as $admin)
+												{
+													$person = $ginger->getUser($admin);
+													echo "<tr>";
+													echo "<td>".$i."</td>";
+													echo "<td>".$person->nom."</td>";
+													echo "<td>".$person->prenom."</td>";
+													echo "<td>".$admin."</td>";
+													echo '<td><button class="btn btn-blue" type="submit" style="width:100%;">Supprimer droits admins</button></td>';
+													echo "</tr>";
+													$i++;
+												}
+											?>
+			            </tbody>
+			        </table>
 						</div>
 					</div>
 				</div>
