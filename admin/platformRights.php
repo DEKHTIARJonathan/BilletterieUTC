@@ -90,8 +90,8 @@
 						<div class="panel-body">
 							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createAsso.php" ?>">
 								<div class="form-group">
-									<label class="col-sm-4 control-label" for="assoName">Nom du nouvel administrateur :</label>
-									<div class="col-sm-8">
+									<label class="col-sm-5 control-label" for="assoName">Nom du nouvel administrateur :</label>
+									<div class="col-sm-7">
 										<input autocomplete="off" class="form-control" id="userName" name="userName" placeholder="Ecrivez le nom du nouvel administrateur" type="text">
 										<input id="userId" name="userId" type="hidden" value="">
 
@@ -99,7 +99,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-5">
+									<div class="col-sm-offset-4 col-sm-5">
 										<button class="btn btn-blue" type="submit">Envoyer la demande</button>
 									</div>
 								</div>
@@ -206,11 +206,16 @@
 				    if (response["status"] != "OK")
 							alert("KO");
 						else {
-							$.each(response["rslt"], function(i, item) {
-								$("#proposalUL").append('<li class="proposal"><a href="#">'+item.prenom + " " + item.nom + " ("+item.login+")"+'</a></li>');
-							});
-							$("#proposalUL").addClass("typeahead");
-							setCallBack();
+							if(response["rslt"].length != 0){
+								$.each(response["rslt"], function(i, item) {
+									$("#proposalUL").append('<li class="proposal"><a href="#">'+item.prenom + " " + item.nom + " ("+item.login+")"+'</a></li>');
+
+									if (i+1 >= 7) // Displaying at Max 7 results
+										return false;
+								});
+								$("#proposalUL").addClass("typeahead");
+								setCallBack();
+							}
 						}
 				  },
 				  error: function(xhr) {
