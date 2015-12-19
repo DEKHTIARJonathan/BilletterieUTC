@@ -30,9 +30,17 @@ fieldset[disabled] .form-control {
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #E3F1E8;
+  background-color: #E3F1E8;
 }
 
 .table-striped > tbody > tr {
-    color: #3E3E3E;
+  text-align: center;
+  color: #3E3E3E;
+}
+
+.table-striped > thead > tr > th {
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  color: #3E3E3E;
 }
