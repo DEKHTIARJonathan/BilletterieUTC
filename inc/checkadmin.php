@@ -8,9 +8,7 @@
 	require_once $root.'/inc/API.php';
 	$api = new API();
 
-	$role = $api->getPlatformRole($_SESSION['login']);
-
-  if ($role == "admin"){
+  if ($api->isAdmin($_SESSION['login'])){
     $_SESSION['admin'] = True;
 
 		$array = $api->getAllAssos();
@@ -18,38 +16,20 @@
 			$_SESSION['assos'][$i] = $array[$i];
 			$_SESSION['roles'][$i] = "admin";
 		}
+  }
+	else {
+		if ($api->isAssoAdmin($_SESSION['login'])){
+			$_SESSION['admin'] = False;
 
-  } elseif ($role == "user") {
-    $_SESSION['admin'] = False;
+			$matrix = $api->getAssosRoles($_SESSION['login']);
 
-    $matrix = $api->getAssosRoles($_SESSION['login']);
-
-		for ($i = 0; $i < sizeof($matrix['association']); $i ++){
-			$_SESSION['assos'][$i] = $matrix['association'][$i];
-			$_SESSION['roles'][$i] = $matrix['role'][$i];
+			for ($i = 0; $i < sizeof($matrix['association']); $i ++){
+				$_SESSION['assos'][$i] = $matrix['association'][$i];
+				$_SESSION['roles'][$i] = $matrix['role'][$i];
+			}
 		}
-
-  } else
-    header('Location: '.$_CONFIG["website"]['home']);
-
-  /*
-	if (sizeof($rslt) > 0){
-		for ($i = 0; $i < sizeof($rslt); $i ++){
-			$_SESSION['association'] = $rslt[$i]['association'];
-			$_SESSION['role'] = $rslt[$i]['role'];
-		}
-		header('Location: '.$_CONFIG["website"]['home']."admin2/index.php");
-	}
-	else
-		header('Location: '.$_CONFIG["website"]['home']);
-
-  session_start();
-
-  $asso = isset($_SESSION['asso']) ? $_SESSION['asso'] : '';
-  $email_asso = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-
-  if($asso == "" || $email_asso == "")
-
-  */
+		else
+			header('Location: '.$_CONFIG["website"]['home']);
+  }
 
 ?>

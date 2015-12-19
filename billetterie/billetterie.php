@@ -97,38 +97,46 @@
 								$matrix = $api->getAllTarifsByEvent($eventID);
 
 								$i = 0;
-								foreach ($matrix as &$row) {
-									$tarifID = $row["tarifID"];
-									$eventID = $row["eventID"];
-									$name = $row["tarifName"];
-									$price = $row["price"];
-									$maxByUser = $row["maxByUser"];
+								if ($matrix){
+									foreach ($matrix as &$row) {
+										$tarifID = $row["tarifID"];
+										$eventID = $row["eventID"];
+										$name = $row["tarifName"];
+										$price = $row["price"];
+										$maxByUser = $row["maxByUser"];
 
-									if ($i % 3 == 0)
-										echo '<tr class="success">';
-									else if ($i % 3 == 1)
-										echo '<tr class="warning">';
-									else
-										echo '<tr class="info">';
-									$i = $i +1;
+										if ($i % 3 == 0)
+											echo '<tr class="success">';
+										else if ($i % 3 == 1)
+											echo '<tr class="warning">';
+										else
+											echo '<tr class="info">';
+										$i = $i +1;
 
-									echo '<td>'.$name.'</td>';
-									echo '<td>'.$price.'&#8364</td>';
-									echo '<td><div class="form-group"><select class="form-control" id="sel1">';
+										echo '<td>'.$name.'</td>';
+										echo '<td>'.$price.'&#8364</td>';
+										echo '<td><div class="form-group"><select class="form-control" id="sel1">';
 
-									for ($j = 1; $j <= $maxByUser; $j++) {
-										echo '<option>'.$j.'</option>';
+										for ($j = 1; $j <= $maxByUser; $j++) {
+											echo '<option>'.$j.'</option>';
+										}
+
+										echo '</select></div></td>';
+										echo '<td><button type="button" class="btn btn-success">Acheter</button></td>';
+										echo '</tr>';
 									}
-
-									echo '</select></div></td>';
-									echo '<td><button type="button" class="btn btn-success">Acheter</button></td>';
-									echo '</tr>';
 								}
 							?>
 						</tbody>
 					  </table>
 					<br>
-					<h3><center>Nombre de place restantes : <?php echo $placeLeft; ?></center></h3>
+					<?php
+						if ($matrix)
+							echo "<h4><center>Nombre de place restantes : ".$placeLeft."</center></h4>";
+						else
+							echo "<h4><center>Vous n'êtes éligible actuellement à aucun tarif à la vente.</h4>";
+					?>
+
 					<br>
 				</div>
 			</div>
