@@ -90,7 +90,7 @@
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
 							<h4>Ajout d'un nouvel administrateur</h4><br>
-							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/createAsso.php" ?>">
+							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/addAdmin.php" ?>">
 								<div class="form-group">
 									<label class="col-sm-5 control-label" for="assoName">Nom du nouvel administrateur :</label>
 									<div class="col-sm-7">
@@ -131,14 +131,16 @@
 												foreach($admins as $admin)
 												{
 													$person = $ginger->getUser($admin);
-													echo "<tr>";
-													echo "<td>".$i."</td>";
-													echo "<td>".$person->nom."</td>";
-													echo "<td>".$person->prenom."</td>";
-													echo "<td>".$admin."</td>";
-													echo '<td><button class="btn btn-blue" type="submit" style="width:100%;">Supprimer droits admins</button></td>';
-													echo "</tr>";
-													$i++;
+													if ($person){
+														echo "<tr>";
+														echo "<td>".$i."</td>";
+														echo "<td>".$person->nom."</td>";
+														echo "<td>".$person->prenom."</td>";
+														echo "<td>".$admin."</td>";
+														echo '<td><button class="btn btn-blue deleteAction" type="submit" style="width:100%;" data-login="'.$admin.'">Supprimer droits admins</button></td>';
+														echo "</tr>";
+														$i++;
+													}
 												}
 											?>
 			            </tbody>
@@ -242,6 +244,26 @@
 				$("#proposalUL").empty();
 			});
 		}
+
+		$(".deleteAction").on('click', function() {
+			var login = $(this).attr("data-login");
+			var row = $(this).parent().parent();
+			$.ajax({
+				url: "/inc/removeAdmin.php",
+				type: "post", //send it through get method
+				data:{admin:login},
+				dataType: "json",
+				success: function(response) {
+					if (response["status"] == "OK")
+						row.remove();
+					else
+						alert("Erreur: "+response["error"]);
+				},
+				error: function(xhr) {
+					alert("Erreur, action non exécutée");
+				}
+			});
+		});
 
 	</script>
 

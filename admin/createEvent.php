@@ -197,6 +197,14 @@
 		<script id="script-resource-33" src="assets/js/jquery.inputmask.bundle.js"></script>
 
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
+	<script>
+		$('.datepicker').on('change', function(){
+	        $('.datepicker-dropdown').hide();
+	  });
+		$('.datepicker').on('click', function(){
+	        $('.ddatepicker-dropdown').show();
+	  });
+	</script>
 
 </body>
 </html>

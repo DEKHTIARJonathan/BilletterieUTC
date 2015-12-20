@@ -22,7 +22,7 @@ class API {
   }
 	public function checkRights($login, $asso){
 		$sth = $this->connexion->prepare('Select `t1`.`isAdmin`, `t2`.`hasRight`, `t3`.`name` From
-		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `admin` where `login` = :login) as `t1`,
+		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `admins` where `login` = :login) as `t1`,
 		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `hasRight` From `asso_assoc` where `login` = :login and `association` = :asso) as `t2`,
 		`assos` as `t3`
 		WHERE `t3`.`name` = :asso;
@@ -49,25 +49,14 @@ class API {
 
 		return $sth->execute();
 	}
-	public function createEvent($asso, $name, $eventDate, $flyer, $maxTickets, $location){
-		$sth = $this->connexion->prepare("INSERT INTO `events` (`eventID`, `asso`, `eventName`, `eventDate`, `eventFlyer`, `eventTicketMax`, `location`) VALUES (NULL, :asso, :name, DATE_FORMAT(STR_TO_DATE(:eventDate,'%d/%m/%Y'),'%Y-%m-%d'), :flyer, :maxTickets, :location)");
+	public function addAdmin($login){
+		$sth = $this->connexion->prepare('INSERT INTO `admins` (`login`) VALUES (:login);');
 
-		$sth->bindParam(':asso', $asso);
-		$sth->bindParam(':name', $name);
-		$sth->bindParam(':eventDate', $eventDate);
-		$sth->bindParam(':flyer', $flyer);
-		$sth->bindParam(':maxTickets', $maxTickets);
-		$sth->bindParam(':location', $location);
-
+		$sth->bindParam(':login', $login);
 		return $sth->execute();
 	}
-	public function getPeopleCount(){
-		$sth = $this->connexion->prepare('SELECT COUNT(DISTINCT `login`) as `peopleCount` FROM ((SELECT DISTINCT `login` FROM `admin`) UNION ALL (SELECT DISTINCT `login` FROM `asso_assoc`)) `peopleCount`');
-		$sth->execute();
-		return $sth->fetch()["peopleCount"];
-	}
 	public function getAllAdmins(){
-		$sth = $this->connexion->prepare('SELECT `login` FROM `admin` order by `login`');
+		$sth = $this->connexion->prepare('SELECT `login` FROM `admins` order by `login`');
 		$sth->execute();
 
 		$i = 0;
@@ -140,6 +129,20 @@ class API {
 
 		return $matrix;
 	}
+	public function getAllRoles(){
+		$sth = $this->connexion->prepare('SELECT `role` FROM `asso_role` ORDER BY `role`;');
+		$sth->execute();
+
+		$i = 0;
+		$array = array();
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+			$array[$i] = $row["role"];
+			$i ++;
+		}
+
+		return $array;
+	}
 	public function getAllTarifsByEvent($eventID){
 		$sth = $this->connexion->prepare('SELECT * FROM `tarifs` WHERE `eventID` = :eventID');
 		$sth->bindParam(':eventID', $eventID);
@@ -198,13 +201,18 @@ class API {
 
 		return $sth->fetch();
 	}
+	public function getPeopleCount(){
+		$sth = $this->connexion->prepare('SELECT COUNT(DISTINCT `login`) as `peopleCount` FROM ((SELECT DISTINCT `login` FROM `admins`) UNION ALL (SELECT DISTINCT `login` FROM `asso_assoc`)) `peopleCount`');
+		$sth->execute();
+		return $sth->fetch()["peopleCount"];
+	}
 	public function getTicketsSoldCount(){
 		$sth = $this->connexion->prepare('SELECT count(*) FROM `tickets`;');
 		$sth->execute();
 		return $sth->fetch()[0];
 	}
 	public function isAdmin($login){
-		$sth = $this->connexion->prepare('Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `admin` where `login` = :login');
+		$sth = $this->connexion->prepare('Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `admins` where `login` = :login');
 		$sth->bindParam(':login', $login);
 		$sth->execute();
 		return filter_var($sth->fetch()["isAdmin"], FILTER_VALIDATE_BOOLEAN);
@@ -214,6 +222,12 @@ class API {
 		$sth->bindParam(':login', $login);
 		$sth->execute();
 		return filter_var($sth->fetch()["isAssoAdmin"], FILTER_VALIDATE_BOOLEAN);
+	}
+	public function removeAdmin($login){
+		$sth = $this->connexion->prepare('DELETE FROM `admins` WHERE `login` = :login;');
+
+		$sth->bindParam(':login', $login);
+		return $sth->execute();
 	}
 
 }

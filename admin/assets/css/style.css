@@ -33,8 +33,9 @@ fieldset[disabled] .form-control {
   background-color: #E3F1E8;
 }
 
-.table-striped > tbody > tr {
+.table-striped > tbody > tr > td{
   text-align: center;
+  vertical-align: middle;
   color: #3E3E3E;
 }
 

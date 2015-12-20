@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 19 Décembre 2015 à 22:02
+-- Généré le :  Dim 20 Décembre 2015 à 21:15
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -19,23 +19,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Structure de la table `admins`
 --
 -- Création :  Sam 19 Décembre 2015 à 18:12
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
   `login` varchar(8) NOT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `admin`
+-- Contenu de la table `admins`
 --
 
-INSERT INTO `admin` (`login`) VALUES
-('mguffroy');
+INSERT INTO `admins` (`login`) VALUES
+('jennypau');
 
 -- --------------------------------------------------------
 
@@ -70,16 +70,17 @@ INSERT INTO `assos` (`name`, `email`, `payutcKey`) VALUES
 --
 -- Structure de la table `asso_assoc`
 --
--- Création :  Sam 19 Décembre 2015 à 18:16
+-- Création :  Dim 20 Décembre 2015 à 19:40
 --
 
 DROP TABLE IF EXISTS `asso_assoc`;
 CREATE TABLE IF NOT EXISTS `asso_assoc` (
   `login` varchar(8) NOT NULL DEFAULT '',
   `association` varchar(255) NOT NULL DEFAULT '',
-  `role` enum('President','Tresorier','Membre') DEFAULT NULL,
+  `role` varchar(255) NOT NULL,
   PRIMARY KEY (`login`,`association`),
-  KEY `fk_asso_assoc` (`association`)
+  KEY `fk_asso_assoc` (`association`),
+  KEY `role` (`role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -87,9 +88,31 @@ CREATE TABLE IF NOT EXISTS `asso_assoc` (
 --
 
 INSERT INTO `asso_assoc` (`login`, `association`, `role`) VALUES
-('colinajo', 'Comet', 'President'),
-('jdekhtia', 'Bde', 'President'),
-('jdekhtia', 'Etuville', 'Tresorier');
+('jdekhtia', 'Bde', 'Membre'),
+('jdekhtia', 'Billetterie', 'President');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `asso_role`
+--
+-- Création :  Dim 20 Décembre 2015 à 19:40
+--
+
+DROP TABLE IF EXISTS `asso_role`;
+CREATE TABLE IF NOT EXISTS `asso_role` (
+  `role` varchar(255) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`role`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `asso_role`
+--
+
+INSERT INTO `asso_role` (`role`) VALUES
+('Membre'),
+('President'),
+('Trésorier');
 
 -- --------------------------------------------------------
 
@@ -242,6 +265,7 @@ INSERT INTO `tickets` (`ticketID`, `tarifName`, `eventID`, `buyerLogin`, `ticket
 -- Contraintes pour la table `asso_assoc`
 --
 ALTER TABLE `asso_assoc`
+  ADD CONSTRAINT `fk_asso_role` FOREIGN KEY (`role`) REFERENCES `asso_role` (`role`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_asso_assoc` FOREIGN KEY (`association`) REFERENCES `assos` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
