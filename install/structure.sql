@@ -288,3 +288,6 @@ ALTER TABLE `tickets`
   ADD CONSTRAINT `fk_eventID_ticket` FOREIGN KEY (`eventID`) REFERENCES `events` (`eventID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tariftype_ticket` FOREIGN KEY (`tarifName`) REFERENCES `tariftypes` (`tarifName`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
+
+
+DROP PROCEDURE IF EXISTS `cleanDB`; CREATE PROCEDURE `cleanDB`() DROP TABLE IF EXISTS `tickets`, `tarifs`, `tariftypes`, `events`, `asso_assoc`, `asso_role`, `assos`, `admins`;

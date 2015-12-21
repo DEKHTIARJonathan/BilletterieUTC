@@ -8,6 +8,14 @@
         printf("Echec de la connexion : %s\n", mysqli_connect_error());
         exit();
     }
+	
+	/* Modification du jeu de résultats en utf8 */
+
+	if (!$mysqli->set_charset("utf8"))
+		echo "Erreur lors du chargement du jeu de caractères utf8: ". $mysqli->error;
+	else
+		echo "Jeu de caractères courant: ". $mysqli->character_set_name();
+
 
     $requete = file_get_contents("structure.sql");
 
