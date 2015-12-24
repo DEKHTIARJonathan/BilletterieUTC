@@ -9,14 +9,14 @@
 
 	$api = new API();
 
-	$asso = $_SESSION['currentAsso'];
+	$asso = isset($_SESSION['currentAsso']) ? $_SESSION['currentAsso'] : '';
 
 	$eventName = isset($_POST['eventName']) ? ucfirst(mb_strtolower($_POST['eventName'], 'UTF-8')) : '';
 	$eventDate = isset($_POST['eventDate']) ? $_POST['eventDate'] : '';
 	$eventLocation = isset($_POST['eventLocation']) ? ucfirst(mb_strtolower($_POST['eventLocation'], 'UTF-8')) : '';
 	$maxTickets = isset($_POST['maxTickets']) ? $_POST['maxTickets'] : '';
 
-	if ($eventName != '' && $eventDate != '' && $eventLocation != '' && $maxTickets != ''){
+	if ($eventName != '' && $eventDate != '' && $eventLocation != '' && $maxTickets != '' && $asso != ''){
 
 				$target_file = $_CONFIG["website"]['uploadPath'].generateRandomString(20);
 

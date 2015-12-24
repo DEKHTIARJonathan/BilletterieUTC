@@ -9,7 +9,7 @@
 	$api = new API();
 
   $userLogin = isset($_POST['assoMember']) ? mb_strtolower($_POST['assoMember'], 'UTF-8') : '';
-	$asso = isset($_SESSION['currentAsso']) ? mb_strtolower($_SESSION['currentAsso'], 'UTF-8') : '';
+	$asso = isset($_SESSION['currentAsso']) ? $_SESSION['currentAsso'] : '';
 
   if ($userLogin != '' && $asso != ''){
 		try{

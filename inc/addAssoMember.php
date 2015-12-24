@@ -10,7 +10,7 @@
 
   $userLogin = isset($_POST['userId']) ? mb_strtolower($_POST['userId'], 'UTF-8') : '';
 	$memberRole = isset($_POST['memberRole']) ? ucfirst(mb_strtolower($_POST['memberRole'], 'UTF-8')) : '';
-	$asso = isset($_SESSION['currentAsso']) ? mb_strtolower($_SESSION['currentAsso'], 'UTF-8') : '';
+	$asso = isset($_SESSION['currentAsso']) ? $_SESSION['currentAsso'] : '';
 
   if ($userLogin != '' && $memberRole != '' && $asso != ''){
 		try{

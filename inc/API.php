@@ -195,6 +195,20 @@ class API {
 		$sth->execute();
 		return $sth->fetch()[0];
 	}
+	public function getAssoInfos($asso){
+		$sth = $this->connexion->prepare('Select `name`, `email`, `payutcKey` From `assos` where `name` = :asso;');
+		$sth->bindParam(':asso', $asso);
+		$sth->execute();
+
+		$output = $sth->fetch();
+
+		$rslt["name"] = $output["name"];
+		$rslt["email"] = $output["email"];
+		$rslt["payutcKey"] = $output["payutcKey"];
+
+		return $rslt;
+
+	}
 	public function getAssosRoles($login){
 
 		$sth = $this->connexion->prepare('SELECT `association`, `role` FROM `asso_assoc` WHERE (`login` = :login)');
@@ -261,7 +275,16 @@ class API {
 		$sth->bindParam(':asso', $asso);
 		return $sth->execute();
 	}
+	public function updateAsso($name_old, $name_new, $email, $payutcKey){
+		$sth = $this->connexion->prepare('UPDATE `assos` SET `name` = :asso_new, `email` = :email, `payutcKey` = :payutckey  WHERE `name` = :asso_old;');
 
+		$sth->bindParam(':asso_old', $name_old);
+		$sth->bindParam(':asso_new', $name_new);
+		$sth->bindParam(':email', $email);
+		$sth->bindParam(':payutckey', $payutcKey);
+
+		return $sth->execute();
+	}
 
 }
 

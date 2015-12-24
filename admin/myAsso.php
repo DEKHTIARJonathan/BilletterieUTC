@@ -25,10 +25,13 @@
 		if (isset($_SESSION['currentAsso']))
 		 $asso = $_SESSION['currentAsso'];
 		else{
-		 $asso = $_SESSION['assos'][0];
-		 $_SESSION['currentAsso'] = $asso;
+			echo $_SESSION['currentAsso'];
+			$asso = $_SESSION['assos'][0];
+		 	$_SESSION['currentAsso'] = $asso;
 		}
 	}
+
+	$assoInfos = $api->getAssoInfos($asso);
 
 ?>
 
@@ -71,77 +74,105 @@
 
 		<div class="main-content">
 
+			<hr>
+
+			<ol class="breadcrumb bc-3">
+				<li><a href="<?php echo $_CONFIG["website"]['home']."admin"?>"><i class="fa-home"></i>Accueil</a></li>
+				<li><a href="<?php echo $_CONFIG["website"]['home']."admin"?>">Mon association</a></li>
+				<li class="active"><strong>Gestion des paramètres de l'association</strong></li>
+			</ol>
+
+			<h2>Modifier les paramètres de mon association</h2><br>
 			<div class="row">
-				<form>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">Date Picker (popup)</label>
-						<div class="col-sm-3">
-							<div class="input-group">
-								<input type="text" class="form-control datepicker" data-format="D, dd MM yyyy">
-								<div class="input-group-addon">
-									<a href="#">
-										<i class="entypo-calendar"></i>
-									</a>
+				<div class="col-md-12">
+					<div class="panel panel-primary" data-collapsed="0">
+						<div class="panel-body">
+							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/updateAsso.php" ?>">
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="assoName">Nom de l'association :</label>
+									<div class="col-sm-5">
+										<input class="form-control" id="assoName" name="assoName" value="<?php echo $assoInfos["name"]; ?>"	type="text">
+									</div>
 								</div>
-							</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="assoEmail">Adresse email associative :</label>
+									<div class="col-sm-5">
+										<input class="form-control" disabled id="assoEmail" type="text" value="<?php echo	$assoInfos["email"]; ?>">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label" for="payutcKey">PayUTC API Key :</label>
+									<div class="col-sm-5">
+										<input class="form-control" id="payutcKey" name="payutcKey" type="text" value="<?php echo	$assoInfos["payutcKey"]; ?>">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-3 col-sm-5">
+										<button class="btn btn-blue" type="submit">Modifier mon association</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
-				</form>
-
-
-
+				</div>
 			</div>
 
 		</div>
+	</div>
 
-		<link id="style-resource-1" rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
-		<link id="style-resource-2" rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
-		<link id="style-resource-3" rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
-		<link id="style-resource-4" rel="stylesheet" href="assets/js/select2/select2.css">
-		<link id="style-resource-5" rel="stylesheet" href="assets/js/selectboxit/jquery.selectBoxIt.css">
-		<link id="style-resource-6" rel="stylesheet" href="assets/js/daterangepicker/daterangepicker-bs3.css">
-		<link id="style-resource-7" rel="stylesheet" href="assets/js/icheck/skins/minimal/_all.css">
-		<link id="style-resource-8" rel="stylesheet" href="assets/js/icheck/skins/square/_all.css">
-		<link id="style-resource-9" rel="stylesheet" href="assets/js/icheck/skins/flat/_all.css">
-		<link id="style-resource-10" rel="stylesheet" href="assets/js/icheck/skins/futurico/futurico.css">
-		<link id="style-resource-11" rel="stylesheet" href="assets/js/icheck/skins/polaris/polaris.css">
-		<link id="style-resource-12" rel="stylesheet" href="assets/js/dropzone/dropzone.css">
+	<link id="style-resource-1" rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
+	<link id="style-resource-2" rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+	<link id="style-resource-3" rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
+	<link id="style-resource-4" rel="stylesheet" href="assets/js/select2/select2.css">
+	<link id="style-resource-5" rel="stylesheet" href="assets/js/selectboxit/jquery.selectBoxIt.css">
+	<link id="style-resource-6" rel="stylesheet" href="assets/js/daterangepicker/daterangepicker-bs3.css">
+	<link id="style-resource-7" rel="stylesheet" href="assets/js/icheck/skins/minimal/_all.css">
+	<link id="style-resource-8" rel="stylesheet" href="assets/js/icheck/skins/square/_all.css">
+	<link id="style-resource-9" rel="stylesheet" href="assets/js/icheck/skins/flat/_all.css">
+	<link id="style-resource-10" rel="stylesheet" href="assets/js/icheck/skins/futurico/futurico.css">
+	<link id="style-resource-11" rel="stylesheet" href="assets/js/icheck/skins/polaris/polaris.css">
+	<link id="style-resource-12" rel="stylesheet" href="assets/js/dropzone/dropzone.css">
 
-		<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
-		<script id="script-resource-2" src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
-		<script id="script-resource-3" src="assets/js/bootstrap.js"></script>
-		<script id="script-resource-4" src="assets/js/joinable.js"></script>
-		<script id="script-resource-5" src="assets/js/resizeable.js"></script>
-		<script id="script-resource-6" src="assets/js/neon-api.js"></script>
-		<script id="script-resource-7" src="assets/js/cookies.min.js"></script>
-		<script id="script-resource-8" src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-		<script id="script-resource-9" src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
-		<script id="script-resource-10" src="assets/js/jquery.sparkline.min.js"></script>
-		<script id="script-resource-11" src="assets/js/rickshaw/vendor/d3.v3.js"></script>
-		<script id="script-resource-12" src="assets/js/rickshaw/rickshaw.min.js"></script>
-		<script id="script-resource-13" src="assets/js/raphael-min.js"></script>
-		<script id="script-resource-14" src="assets/js/morris.min.js"></script>
-		<script id="script-resource-15" src="assets/js/toastr.js"></script>
-		<script id="script-resource-16" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
-		<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
-		<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
-		<script id="script-resource-19" src="assets/js/script.js"></script>
-		<script id="script-resource-20" src="assets/js/select2/select2.min.js"></script>
-		<script id="script-resource-21" src="assets/js/bootstrap-tagsinput.min.js"></script>
-		<script id="script-resource-22" src="assets/js/typeahead.min.js"></script>
-		<!--	<script id="script-resource-23" src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>	-->
-		<script id="script-resource-24" src="assets/js/bootstrap-datepicker.js"></script>
-		<script id="script-resource-25" src="assets/js/bootstrap-timepicker.min.js"></script>
-		<script id="script-resource-26" src="assets/js/bootstrap-colorpicker.min.js"></script>
-		<script id="script-resource-27" src="assets/js/moment.min.js"></script>
-		<script id="script-resource-28" src="assets/js/daterangepicker/daterangepicker.js"></script>
-		<script id="script-resource-29" src="assets/js/jquery.multi-select.js"></script>
-		<script id="script-resource-30" src="assets/js/icheck/icheck.min.js"></script>
-		<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
-		<script id="script-resource-32" src="assets/js/fileinput.js"></script>
-		<script id="script-resource-33" src="assets/js/jquery.inputmask.bundle.js"></script>
+	<script id="script-resource-1" src="assets/js/gsap/TweenMax.min.js"></script>
+	<script id="script-resource-2" src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+	<script id="script-resource-3" src="assets/js/bootstrap.js"></script>
+	<script id="script-resource-4" src="assets/js/joinable.js"></script>
+	<script id="script-resource-5" src="assets/js/resizeable.js"></script>
+	<script id="script-resource-6" src="assets/js/neon-api.js"></script>
+	<script id="script-resource-7" src="assets/js/cookies.min.js"></script>
+	<script id="script-resource-8" src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+	<script id="script-resource-9" src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
+	<script id="script-resource-10" src="assets/js/jquery.sparkline.min.js"></script>
+	<script id="script-resource-11" src="assets/js/rickshaw/vendor/d3.v3.js"></script>
+	<script id="script-resource-12" src="assets/js/rickshaw/rickshaw.min.js"></script>
+	<script id="script-resource-13" src="assets/js/raphael-min.js"></script>
+	<script id="script-resource-14" src="assets/js/morris.min.js"></script>
+	<script id="script-resource-15" src="assets/js/toastr.js"></script>
+	<script id="script-resource-16" src="assets/js/neon-chat.js"></script> <!-- JavaScripts initializations and stuff -->
+	<script id="script-resource-17" src="assets/js/neon-custom.js"></script> <!-- Demo Settings -->
+	<script id="script-resource-18" src="assets/js/neon-demo.js"></script>
+	<script id="script-resource-19" src="assets/js/script.js"></script>
+	<script id="script-resource-20" src="assets/js/select2/select2.min.js"></script>
+	<script id="script-resource-21" src="assets/js/bootstrap-tagsinput.min.js"></script>
+	<script id="script-resource-22" src="assets/js/typeahead.min.js"></script>
+	<!--	<script id="script-resource-23" src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>	-->
+	<script id="script-resource-24" src="assets/js/bootstrap-datepicker.js"></script>
+	<script id="script-resource-25" src="assets/js/bootstrap-timepicker.min.js"></script>
+	<script id="script-resource-26" src="assets/js/bootstrap-colorpicker.min.js"></script>
+	<script id="script-resource-27" src="assets/js/moment.min.js"></script>
+	<script id="script-resource-28" src="assets/js/daterangepicker/daterangepicker.js"></script>
+	<script id="script-resource-29" src="assets/js/jquery.multi-select.js"></script>
+	<script id="script-resource-30" src="assets/js/icheck/icheck.min.js"></script>
+	<script id="script-resource-31" src="assets/js/dropzone/dropzone.js"></script>
+	<script id="script-resource-32" src="assets/js/fileinput.js"></script>
+	<script id="script-resource-33" src="assets/js/jquery.inputmask.bundle.js"></script>
 
 	<script> <?php echo '$(\'#assoSelect option[value="'.$asso.'"]\').prop("selected", true);'; ?></script>
+	<script>
+		$('#assoName').on('input', function() {
+	    $("#assoEmail").val(this.value.toLowerCase() + "@assos.utc.fr");
+		});
+	</script>
 
 </body>
 </html>
