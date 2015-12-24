@@ -12,7 +12,11 @@
 
 	if($_SESSION['admin'] && $inputSTR != ''){
 		try{
-			$arr = array("status"=>"OK", "rslt"=>$ginger->findPersonne($inputSTR));
+			$rslt = $ginger->findPersonne($inputSTR);
+			if ($rslt != NULL)
+				$arr = array("status"=>"OK", "rslt"=>$rslt);
+			else
+				$arr = array("status"=>"KO", "Error"=>"API Call Failed, null result");
 		}
 		catch(Exception $e){
 			$arr = array("status"=>"KO", "Error"=>"API Call Failed");

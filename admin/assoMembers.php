@@ -172,7 +172,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title">Error Message</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="modalErrorTxt">
 					<?php
 						$error = isset($_GET['error']) ? $_GET['error'] : '';
 						if ($error != "")
@@ -246,8 +246,10 @@
 				  data:{request:requestSTR},
 					dataType: "json",
 				  success: function(response) {
-				    if (response["status"] != "OK")
-							alert("KO");
+				    if (response["status"] != "OK"){
+							$("#modalErrorTxt").html("Erreur: " + response["Error"]);
+							$("#modal-error").modal('show');
+						}
 						else {
 							if(response["rslt"].length != 0){
 								$.each(response["rslt"], function(i, item) {
@@ -262,7 +264,8 @@
 						}
 				  },
 				  error: function(xhr) {
-				    alert ("Error Fetching People from Ginger");
+						$("#modalErrorTxt").html("Error Fetching People from Ginger");
+						$("#modal-error").modal('show');
 				  }
 				});
 			}
@@ -289,11 +292,14 @@
 				success: function(response) {
 					if (response["status"] == "OK")
 						row.remove();
-					else
-						alert("Erreur: "+response["error"]);
+					else{
+						$("#modalErrorTxt").html("Erreur: " + response["error"]);
+						$("#modal-error").modal('show');
+					}
 				},
 				error: function(xhr) {
-					alert("Erreur, action non exécutée");
+					$("#modalErrorTxt").html("Erreur, action non exécutée");
+					$("#modal-error").modal('show');
 				}
 			});
 		});
