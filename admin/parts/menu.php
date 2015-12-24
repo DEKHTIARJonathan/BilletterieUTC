@@ -70,7 +70,7 @@
 								<a href="'.$pre_url.'createAsso.php"><span class="title">Création Association</span></a>
 							</li>
 							<li id="platformRights">
-								<a href="'.$pre_url.'platformRights.php"><span class="title">Gestion des droits admin</span></a>
+								<a href="'.$pre_url.'platformRights.php"><span class="title">Gestion des droits admins</span></a>
 							</li>
 						</ul>
 					</li>';

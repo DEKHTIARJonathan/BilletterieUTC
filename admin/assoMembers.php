@@ -85,11 +85,11 @@
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
 							<h4>Ajout d'un nouveau membre</h4><br>
-							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/addAdmin.php" ?>">
+							<form class="form-horizontal form-groups-bordered" role="form" method="post" action="<?php echo $_CONFIG["website"]['home']."inc/addAssoMember.php" ?>">
 								<div class="form-group">
 									<label class="col-sm-5 control-label" for="assoName">Nom du nouveau membre :</label>
 									<div class="col-sm-7">
-										<input autocomplete="off" class="form-control" id="userName" name="userName" placeholder="Ecrivez le nom du nouvel administrateur" type="text">
+										<input autocomplete="off" class="form-control" id="userName" name="userName" placeholder="Ecrivez le nom du nouveau membre" type="text">
 										<input id="userId" name="userId" type="hidden" value="">
 
 										<ul class="dropdown-menu" id="proposalUL"></ul>
@@ -121,32 +121,34 @@
 				<div class="col-md-7">
 					<div class="panel panel-primary" data-collapsed="0">
 						<div class="panel-body">
-							<h4>Suppression des droits administrateurs</h4><br>
+							<h4>Suppression des droits associatifs</h4><br>
 			        <table class="table table-striped">
 			            <thead>
 			                <tr>
 			                    <th class="col-md-1">#</th>
-													<th class="col-md-3">Nom</th>
-													<th class="col-md-3">Prénom</th>
+													<th class="col-md-2">Nom</th>
+													<th class="col-md-2">Prénom</th>
 			                    <th class="col-md-2">Login</th>
+													<th class="col-md-2">Poste</th>
 			                    <th class="col-md-3">Action</th>
 			                </tr>
 			            </thead>
 			            <tbody>
 			                <?php
-												$admins = $api->getAllAdmins();
+												$assoMembers = $api->getAllAssoMembers($asso);
 												$i = 1;
 												$ginger = new gingerAPI();
-												foreach($admins as $admin)
+												foreach($assoMembers as $assoMember)
 												{
-													$person = $ginger->getUser($admin);
+													$person = $ginger->getUser($assoMember["login"]);
 													if ($person){
 														echo "<tr>";
 														echo "<td>".$i."</td>";
 														echo "<td>".$person->nom."</td>";
 														echo "<td>".$person->prenom."</td>";
-														echo "<td>".$admin."</td>";
-														echo '<td><button class="btn btn-blue deleteAction" type="submit" style="width:100%;" data-login="'.$admin.'">Supprimer droits admins</button></td>';
+														echo "<td>".$assoMember["login"]."</td>";
+														echo "<td>".$assoMember["role"]."</td>";
+														echo '<td><button class="btn btn-blue deleteAction" type="submit" style="width:100%;" data-login="'.$assoMember["login"].'">Supprimer droits assos</button></td>';
 														echo "</tr>";
 														$i++;
 													}
@@ -159,6 +161,27 @@
 				</div>
 			</div>
 
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal-error">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Error Message</h4>
+				</div>
+				<div class="modal-body">
+					<?php
+						$error = isset($_GET['error']) ? $_GET['error'] : '';
+						if ($error != "")
+							echo $error;
+					?>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -258,9 +281,9 @@
 			var login = $(this).attr("data-login");
 			var row = $(this).parent().parent();
 			$.ajax({
-				url: "/inc/removeAdmin.php",
+				url: "/inc/removeAssoMember.php",
 				type: "post", //send it through get method
-				data:{admin:login},
+				data:{assoMember:login},
 				dataType: "json",
 				success: function(response) {
 					if (response["status"] == "OK")
@@ -275,6 +298,11 @@
 		});
 
 	</script>
+
+	<?php
+		if ($error != "")
+			echo '<script>$( document ).ready(function() {$("#modal-error").modal("show");});</script>';
+	?>
 
 </body>
 </html>

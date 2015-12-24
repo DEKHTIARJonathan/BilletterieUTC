@@ -20,6 +20,20 @@ class API {
 				die();
 		}
   }
+	public function addAdmin($login){
+		$sth = $this->connexion->prepare('INSERT INTO `admins` (`login`) VALUES (:login);');
+
+		$sth->bindParam(':login', $login);
+		return $sth->execute();
+	}
+	public function addAssoMember($login, $asso, $role){
+		$sth = $this->connexion->prepare('INSERT INTO `asso_assoc` (`login`, `association`, `role`) VALUES (:login, :asso, :role);');
+
+		$sth->bindParam(':login', $login);
+		$sth->bindParam(':asso', $asso);
+		$sth->bindParam(':role', $role);
+		return $sth->execute();
+	}
 	public function checkRights($login, $asso){
 		$sth = $this->connexion->prepare('Select `t1`.`isAdmin`, `t2`.`hasRight`, `t3`.`name` From
 		(Select CASE WHEN count(*) = "0" THEN "FALSE" ELSE "TRUE" END AS `isAdmin` From `admins` where `login` = :login) as `t1`,
@@ -49,12 +63,6 @@ class API {
 
 		return $sth->execute();
 	}
-	public function addAdmin($login){
-		$sth = $this->connexion->prepare('INSERT INTO `admins` (`login`) VALUES (:login);');
-
-		$sth->bindParam(':login', $login);
-		return $sth->execute();
-	}
 	public function getAllAdmins(){
 		$sth = $this->connexion->prepare('SELECT `login` FROM `admins` order by `login`');
 		$sth->execute();
@@ -64,6 +72,23 @@ class API {
 
 		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
 			$array[$i] = $row["login"];
+			$i ++;
+		}
+
+		return $array;
+	}
+	public function getAllAssoMembers($asso){
+		$sth = $this->connexion->prepare('SELECT `login`, `role` FROM `asso_assoc` WHERE `association` = :asso;');
+		$sth->bindParam(':asso', $asso);
+
+		$sth->execute();
+
+		$i = 0;
+		$array = array();
+
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)){
+			$array[$i]["login"] = $row["login"];
+			$array[$i]["role"] = $row["role"];
 			$i ++;
 		}
 
@@ -229,6 +254,14 @@ class API {
 		$sth->bindParam(':login', $login);
 		return $sth->execute();
 	}
+	public function removeAssoMember($login, $asso){
+		$sth = $this->connexion->prepare('DELETE FROM `asso_assoc` WHERE `login` = :login AND `association` = :asso;');
+
+		$sth->bindParam(':login', $login);
+		$sth->bindParam(':asso', $asso);
+		return $sth->execute();
+	}
+
 
 }
 

@@ -153,6 +153,27 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="modal-error">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Error Message</h4>
+				</div>
+				<div class="modal-body">
+					<?php
+						$error = isset($_GET['error']) ? $_GET['error'] : '';
+						if ($error != "")
+							echo $error;
+					?>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<link id="style-resource-1" rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
 	<link id="style-resource-2" rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
 	<link id="style-resource-3" rel="stylesheet" href="assets/js/select2/select2-bootstrap.css">
@@ -266,6 +287,11 @@
 		});
 
 	</script>
+
+	<?php
+		if ($error != "")
+			echo '<script>$( document ).ready(function() {$("#modal-error").modal("show");});</script>';
+	?>
 
 </body>
 </html>

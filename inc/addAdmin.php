@@ -17,15 +17,15 @@
   if ($userLogin != ''){
 		try{
 			if ($api->addAdmin($userLogin))
-				header('Location: '.$_CONFIG["website"]['home'].'admin/');
+				header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php');
 			else
-					header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php');
+					header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php?error='.urlencode("Erreur lors de l'ajout dans la base de données."));
 		}
 		catch(Exception $e){
-			header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php');
+			header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php?error='.urlencode("Erreur: ".$e));
 		}
   }
   else
-		header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php');
+		header('Location: '.$_CONFIG["website"]['home'].'admin/platformRights.php?error='.urlencode("Erreur: Paramètre userId non reçu."));
 
 ?>
