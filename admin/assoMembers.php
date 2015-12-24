@@ -76,6 +76,7 @@
 
 			<ol class="breadcrumb bc-3">
 				<li><a href="<?php echo $_CONFIG["website"]['home']."admin"?>"><i class="fa-home"></i>Accueil</a></li>
+				<li><a href="<?php echo $_CONFIG["website"]['home']."admin"?>">Mon association</a></li>
 				<li class="active"><strong>Gestion des membres de l'association</strong></li>
 			</ol>
 
