@@ -81,7 +81,7 @@
 				<a ><i class="entypo-gauge"></i><span class="title">Mon association</span></a>
 				<ul id="adminAssoUL">
 					<li id="myAsso">
-						<a href="<?php echo $pre_url; ?>myAsso.php"><span class="title">Paramètres Associations</span></a>
+						<a href="<?php echo $pre_url; ?>myAsso.php"><span class="title">Paramètres de mon Association</span></a>
 					</li>
 					<li id="assoMembers">
 						<a href="<?php echo $pre_url; ?>assoMembers.php"><span class="title">Gérer les membres</span></a>
