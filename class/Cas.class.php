@@ -10,7 +10,15 @@ class Cas {
 	public static function authenticate($ticket,$service) {
 		global $_CONFIG;
 		$url_validate = $_CONFIG["cas"]["url"]."serviceValidate?service=".$service."&ticket=".$ticket;
-		$data = file_get_contents($url_validate);
+		
+		$arrContextOptions=array(
+			"ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false,
+			),
+		); 
+		
+		$data = file_get_contents($url_validate, false, stream_context_create($arrContextOptions));
 		echo $data;
 		if(empty($data)) return -1;
 
