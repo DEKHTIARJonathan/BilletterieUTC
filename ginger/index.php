@@ -6,6 +6,9 @@
   require_once $root.'/ginger/ApiException.php';
   require_once $root.'/ginger/KoalaClient.php';
   require_once $root.'/ginger/GingerClient.php';
+  ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 	$ginger = new \Ginger\Client\GingerClient ($_CONFIG['ginger']["key"], $_CONFIG['ginger']["service"], $_CONFIG['debug']);
 
